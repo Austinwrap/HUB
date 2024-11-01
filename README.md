@@ -1,20 +1,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AUSTINWRAP - The Hustle & Harvest</title>
+    <title>AUSTINWRAP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Updated Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Reset */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         /* Color Variables */
         :root {
-            --background-color: #2E2E2E;  /* Dark gray */
-            --primary-color: #00ADB5;     /* Teal */
-            --secondary-color: #393E46;   /* Darker gray */
-            --accent-color: #FF5722;      /* Vibrant orange */
+            --background-color: #121212;  /* Dark background */
+            --primary-color: #00E5FF;     /* Bright cyan */
+            --secondary-color: #FF4081;   /* Bright pink */
+            --accent-color: #FFC107;      /* Amber */
             --text-color: #FFFFFF;        /* White */
         }
 
@@ -27,6 +27,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         /* Container */
@@ -41,38 +42,64 @@
         header {
             text-align: center;
             padding: 40px 20px;
-            background-color: var(--secondary-color);
+            background-color: var(--background-color);
         }
         header h1 {
-            font-size: 3em;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-size: 4em;
+            font-family: 'Rock Salt', cursive;
             color: var(--primary-color);
+            text-shadow: 2px 2px 8px rgba(0,229,255,0.7);
         }
         header p {
             font-size: 1.2em;
             margin-top: 10px;
-            color: var(--text-color);
+            color: var(--accent-color);
+        }
+        header::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 20px auto 0;
         }
 
         /* Navigation */
         nav {
-            background-color: var(--secondary-color);
+            background-color: var(--background-color);
             padding: 10px 0;
             display: flex;
             justify-content: center;
             gap: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--secondary-color);
         }
         nav a {
-            font-size: 1em;
+            font-size: 1.1em;
             color: var(--text-color);
             text-decoration: none;
             padding: 5px 10px;
-            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+            transition: color 0.3s;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%);
+            width: 0%;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.3s;
         }
         nav a:hover {
-            background-color: var(--primary-color);
-            color: var(--background-color);
+            color: var(--secondary-color);
+        }
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* Section Headings */
@@ -80,11 +107,12 @@
             padding: 40px 20px;
         }
         section h2 {
-            font-size: 2em;
+            font-size: 2.5em;
             text-align: center;
             margin-bottom: 30px;
             color: var(--primary-color);
-            font-weight: 700;
+            font-family: 'Rock Salt', cursive;
+            text-shadow: 2px 2px 8px rgba(0,229,255,0.7);
         }
 
         /* Cards */
@@ -92,25 +120,27 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
         }
         .card {
             background-color: var(--secondary-color);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 20px;
             width: 100%;
             max-width: 280px;
             color: var(--text-color);
-            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .card h3 {
-            font-size: 1.5em;
+            font-size: 1.8em;
             margin-bottom: 15px;
-            color: var(--primary-color);
+            font-family: 'Rock Salt', cursive;
+            color: var(--accent-color);
         }
         .card p {
             font-size: 1em;
@@ -121,24 +151,29 @@
             text-decoration: none;
             background-color: var(--primary-color);
             color: var(--background-color);
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
         }
         .card a:hover {
             background-color: var(--accent-color);
+            transform: translateY(-3px);
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 20px 0;
-            background-color: var(--secondary-color);
+            background-color: var(--background-color);
             color: var(--text-color);
+            border-top: 1px solid var(--secondary-color);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            header h1 { font-size: 3em; }
+            section h2 { font-size: 2em; }
             .cards {
                 flex-direction: column;
                 align-items: center;
@@ -153,7 +188,7 @@
 
 <header>
     <h1>AUSTINWRAP</h1>
-    <p>The Hustle & Harvest: Crafting, Growing, Creating</p>
+    <p> </p>
 </header>
 
 <nav>
@@ -181,11 +216,6 @@
                 <h3>Bristol Tycoon</h3>
                 <p>Own the town in this Monopoly-style game, where every choice builds your legacy.</p>
                 <a href="https://austinwrap.github.io/BristolTycoon/" target="_blank">Play Now</a>
-            </div>
-            <div class="card">
-                <h3>Mobile Bartending</h3>
-                <p>A complete web experience for the traveling bartender. Made for Raeanne’s service.</p>
-                <a href="https://austinwrap.github.io/Mobile-Bartending/" target="_blank">Visit Site</a>
             </div>
         </div>
     </section>
@@ -222,6 +252,11 @@
         <h2>Shop & Support</h2>
         <div class="cards">
             <div class="card">
+                <h3>Mobile Bartending</h3>
+                <p>A complete web experience for the traveling bartender. Made for Raeanne’s service.</p>
+                <a href="https://austinwrap.github.io/Mobile-Bartending/" target="_blank">Visit Site</a>
+            </div>
+            <div class="card">
                 <h3>Etsy Shop</h3>
                 <p>Farm-inspired gear, tech merch, and unique prints.</p>
                 <a href="https://www.etsy.com/shop/MyFavoriteAlien" target="_blank">Explore</a>
@@ -246,7 +281,7 @@
 </div>
 
 <footer>
-    &copy; 2024 AUSTINWRAP - Hustling & Growing
+    &copy; 2024 AUSTINWRAP
 </footer>
 
 </body>
