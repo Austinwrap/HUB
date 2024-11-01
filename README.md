@@ -188,11 +188,10 @@
 
 <header>
     <h1>AUSTINWRAP</h1>
-    <p> </p>
 </header>
 
 <nav>
-    <a href="#projects">Projects</a>
+    <a href="#projects">Games</a>
     <a href="#social">Connect</a>
     <a href="#ecommerce">Shop</a>
 </nav>
@@ -257,6 +256,11 @@
                 <a href="https://austinwrap.github.io/Mobile-Bartending/" target="_blank">Visit Site</a>
             </div>
             <div class="card">
+                <h3>Roundhouse Powerwash LLC</h3>
+                <p>Your trusted partner for professional power washing services.</p>
+                <a href="https://austinwrap.github.io/Powerwash/" target="_blank">Learn More</a>
+            </div>
+            <div class="card">
                 <h3>Etsy Shop</h3>
                 <p>Farm-inspired gear, tech merch, and unique prints.</p>
                 <a href="https://www.etsy.com/shop/MyFavoriteAlien" target="_blank">Explore</a>
@@ -281,7 +285,7 @@
 </div>
 
 <footer>
-    &copy; 2024 AUSTINWRAP
+    &copy; 2024 AUSTINWRAP - Hustling & Growing
 </footer>
 
 </body>
