@@ -285,7 +285,7 @@
 </div>
 
 <footer>
-    &copy; 2024 AUSTINWRAP - Hustling & Growing
+    &copy; 2024 AUSTINWRAP
 </footer>
 
 </body>
