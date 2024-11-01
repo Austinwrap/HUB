@@ -203,11 +203,11 @@
 
 <header>
     <h1>AUSTINWRAP</h1>
-    <p>The Hustle & Harvest: Crafting, Growing, Creating</p>
+    <p></p>
 </header>
 
 <nav>
-    <a href="#projects">Projects</a>
+    <a href="#projects">Games</a>
     <a href="#social">Connect</a>
     <a href="#ecommerce">Shop</a>
 </nav>
@@ -301,7 +301,7 @@
 </div>
 
 <footer>
-    &copy; 2024 AUSTINWRAP - Hustling & Growing
+    &copy; 2024 AUSTINWRAP
 </footer>
 
 </body>
