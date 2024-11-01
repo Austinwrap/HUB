@@ -1,7 +1,8 @@
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AUSTINWRAP</title>
+    <title>AUSTINWRAP - The Hustle & Harvest</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Updated Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -32,7 +33,7 @@
 
         /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 100%; /* Changed from 1200px to 100% */
             margin: 0 auto;
             padding: 20px;
             flex: 1;
@@ -41,24 +42,25 @@
         /* Header */
         header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px; /* Reduced padding */
             background-color: var(--background-color);
         }
         header h1 {
-            font-size: 4em;
+            font-size: 3em; /* Reduced font size */
             font-family: 'Rock Salt', cursive;
             color: var(--primary-color);
             text-shadow: 2px 2px 8px rgba(0,229,255,0.7);
+            word-wrap: break-word; /* Ensure long words wrap */
         }
         header p {
-            font-size: 1.2em;
+            font-size: 1em; /* Reduced font size */
             margin-top: 10px;
             color: var(--accent-color);
         }
         header::after {
             content: '';
             display: block;
-            width: 150px;
+            width: 100px; /* Reduced width */
             height: 3px;
             background: var(--secondary-color);
             margin: 20px auto 0;
@@ -70,14 +72,15 @@
             padding: 10px 0;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 20px; /* Reduced gap */
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--secondary-color);
+            flex-wrap: wrap; /* Allow wrapping on small screens */
         }
         nav a {
-            font-size: 1.1em;
+            font-size: 1em; /* Reduced font size */
             color: var(--text-color);
             text-decoration: none;
             padding: 5px 10px;
@@ -104,15 +107,16 @@
 
         /* Section Headings */
         section {
-            padding: 40px 20px;
+            padding: 30px 20px; /* Reduced padding */
         }
         section h2 {
-            font-size: 2.5em;
+            font-size: 2em; /* Reduced font size */
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px; /* Reduced margin */
             color: var(--primary-color);
             font-family: 'Rock Salt', cursive;
             text-shadow: 2px 2px 8px rgba(0,229,255,0.7);
+            word-wrap: break-word;
         }
 
         /* Cards */
@@ -120,14 +124,14 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 20px; /* Reduced gap */
         }
         .card {
             background-color: var(--secondary-color);
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px; /* Reduced padding */
             width: 100%;
-            max-width: 280px;
+            max-width: 300px; /* Adjusted max-width */
             color: var(--text-color);
             position: relative;
             overflow: hidden;
@@ -137,24 +141,26 @@
             transform: translateY(-5px);
         }
         .card h3 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
+            font-size: 1.5em; /* Reduced font size */
+            margin-bottom: 10px; /* Reduced margin */
             font-family: 'Rock Salt', cursive;
             color: var(--accent-color);
+            word-wrap: break-word;
         }
         .card p {
-            font-size: 1em;
-            margin-bottom: 20px;
+            font-size: 0.9em; /* Reduced font size */
+            margin-bottom: 15px; /* Reduced margin */
         }
         .card a {
             display: inline-block;
             text-decoration: none;
             background-color: var(--primary-color);
             color: var(--background-color);
-            padding: 12px 25px;
+            padding: 10px 20px; /* Reduced padding */
             border-radius: 5px;
             font-weight: bold;
             transition: background-color 0.3s, transform 0.3s;
+            font-size: 0.9em; /* Reduced font size */
         }
         .card a:hover {
             background-color: var(--accent-color);
@@ -164,7 +170,7 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 20px 0;
+            padding: 15px 0; /* Reduced padding */
             background-color: var(--background-color);
             color: var(--text-color);
             border-top: 1px solid var(--secondary-color);
@@ -172,15 +178,24 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            header h1 { font-size: 3em; }
-            section h2 { font-size: 2em; }
-            .cards {
-                flex-direction: column;
-                align-items: center;
-            }
+            header h1 { font-size: 2.5em; }
+            section h2 { font-size: 1.8em; }
+            .card h3 { font-size: 1.3em; }
+            .card p { font-size: 0.85em; }
+            .card a { font-size: 0.85em; }
             nav {
-                flex-wrap: wrap;
+                gap: 10px;
             }
+        }
+
+        @media (max-width: 480px) {
+            header h1 { font-size: 2em; }
+            header p { font-size: 0.9em; }
+            section h2 { font-size: 1.5em; }
+            .card h3 { font-size: 1.1em; }
+            .card p { font-size: 0.8em; }
+            .card a { font-size: 0.8em; padding: 8px 15px; }
+            nav a { font-size: 0.9em; }
         }
     </style>
 </head>
@@ -188,10 +203,11 @@
 
 <header>
     <h1>AUSTINWRAP</h1>
+    <p>The Hustle & Harvest: Crafting, Growing, Creating</p>
 </header>
 
 <nav>
-    <a href="#projects">Games</a>
+    <a href="#projects">Projects</a>
     <a href="#social">Connect</a>
     <a href="#ecommerce">Shop</a>
 </nav>
@@ -230,7 +246,7 @@
             </div>
             <div class="card">
                 <h3>Instagram</h3>
-                <p>Farm moments and tech highlights — a blend of life’s best.</p>
+                <p>Farm moments and tech highlights—a blend of life’s best.</p>
                 <a href="https://www.instagram.com/austinwrap/" target="_blank">Follow Me</a>
             </div>
             <div class="card">
@@ -285,7 +301,7 @@
 </div>
 
 <footer>
-    &copy; 2024 AUSTINWRAP
+    &copy; 2024 AUSTINWRAP - Hustling & Growing
 </footer>
 
 </body>
