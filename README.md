@@ -7,16 +7,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Reset */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
 
         /* Color Variables */
         :root {
-            --background-color: #F5F5F5;  /* Light gray background */
+            --background-color: #F0F4F8;  /* Light blue-gray background */
             --primary-color:     #2C3E50; /* Dark blue-gray for headings */
-            --secondary-color:   #3498DB; /* Soft blue for accents */
-            --accent-color:      #E74C3C; /* Soft red for highlights */
+            --secondary-color:   #546E7A; /* Medium blue-gray for accents */
+            --accent-color:      #90A4AE; /* Light blue-gray for highlights */
             --text-color:        #2C3E50; /* Dark blue-gray for text */
             --card-background:   #FFFFFF; /* White for cards */
+            --link-color:        #1E88E5; /* Blue for links */
+            --link-hover-color:  #1565C0; /* Darker blue for link hover */
         }
 
         /* Body Styling */
@@ -25,15 +31,16 @@
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         /* Container */
         .container {
-            max-width: 100%;
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 10px;
             flex: 1;
@@ -75,7 +82,7 @@
         }
         nav a {
             font-size: 0.9em;
-            color: var(--primary-color);
+            color: var(--link-color);
             text-decoration: none;
             padding: 5px;
             position: relative;
@@ -89,11 +96,11 @@
             transform: translateX(-50%);
             width: 0%;
             height: 2px;
-            background: var(--secondary-color);
+            background: var(--link-color);
             transition: width 0.3s;
         }
         nav a:hover {
-            color: var(--secondary-color);
+            color: var(--link-hover-color);
         }
         nav a:hover::after {
             width: 100%;
@@ -123,8 +130,8 @@
             background-color: var(--card-background);
             border-radius: 10px;
             padding: 15px;
-            width: 100%;
-            max-width: 320px;
+            width: calc(100% - 20px);
+            max-width: 300px;
             color: var(--text-color);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: transform 0.3s;
@@ -146,7 +153,7 @@
         .card a {
             display: inline-block;
             text-decoration: none;
-            background-color: var(--secondary-color);
+            background-color: var(--link-color);
             color: #fff;
             padding: 8px 15px;
             border-radius: 5px;
@@ -155,7 +162,7 @@
             font-size: 0.8em;
         }
         .card a:hover {
-            background-color: var(--accent-color);
+            background-color: var(--link-hover-color);
             transform: translateY(-3px);
         }
 
@@ -194,7 +201,6 @@
 
 <header>
     <h1>AUSTINWRAP</h1>
-    <!-- Subtitle removed as per your request -->
 </header>
 
 <nav>
