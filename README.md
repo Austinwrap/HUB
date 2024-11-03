@@ -1,27 +1,27 @@
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AUSTINWRAP - The Hustle & Harvest</title>
+    <title>AUSTINWRAP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Updated Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Reset */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         /* Color Variables */
         :root {
-            --background-color: #121212;  /* Dark background */
-            --primary-color: #00E5FF;     /* Bright cyan */
-            --secondary-color: #FF4081;   /* Bright pink */
-            --accent-color: #FFC107;      /* Amber */
-            --text-color: #FFFFFF;        /* White */
+            --background-color: #F5F5F5;  /* Light gray background */
+            --primary-color:     #2C3E50; /* Dark blue-gray for headings */
+            --secondary-color:   #3498DB; /* Soft blue for accents */
+            --accent-color:      #E74C3C; /* Soft red for highlights */
+            --text-color:        #2C3E50; /* Dark blue-gray for text */
+            --card-background:   #FFFFFF; /* White for cards */
         }
 
         /* Body Styling */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
@@ -33,57 +33,51 @@
 
         /* Container */
         .container {
-            max-width: 100%; /* Changed from 1200px to 100% */
+            max-width: 100%;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
             flex: 1;
         }
 
         /* Header */
         header {
             text-align: center;
-            padding: 30px 20px; /* Reduced padding */
+            padding: 20px 10px;
             background-color: var(--background-color);
         }
         header h1 {
-            font-size: 3em; /* Reduced font size */
-            font-family: 'Rock Salt', cursive;
+            font-size: 2em;
+            font-family: 'Lora', serif;
             color: var(--primary-color);
-            text-shadow: 2px 2px 8px rgba(0,229,255,0.7);
-            word-wrap: break-word; /* Ensure long words wrap */
-        }
-        header p {
-            font-size: 1em; /* Reduced font size */
-            margin-top: 10px;
-            color: var(--accent-color);
+            word-wrap: break-word;
         }
         header::after {
             content: '';
             display: block;
-            width: 100px; /* Reduced width */
-            height: 3px;
+            width: 80px;
+            height: 2px;
             background: var(--secondary-color);
-            margin: 20px auto 0;
+            margin: 10px auto 0;
         }
 
         /* Navigation */
         nav {
             background-color: var(--background-color);
-            padding: 10px 0;
+            padding: 5px 0;
             display: flex;
             justify-content: center;
-            gap: 20px; /* Reduced gap */
+            gap: 10px;
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--secondary-color);
-            flex-wrap: wrap; /* Allow wrapping on small screens */
+            flex-wrap: wrap;
         }
         nav a {
-            font-size: 1em; /* Reduced font size */
-            color: var(--text-color);
+            font-size: 0.9em;
+            color: var(--primary-color);
             text-decoration: none;
-            padding: 5px 10px;
+            padding: 5px;
             position: relative;
             transition: color 0.3s;
         }
@@ -91,7 +85,7 @@
             content: '';
             position: absolute;
             left: 50%;
-            bottom: -5px;
+            bottom: -3px;
             transform: translateX(-50%);
             width: 0%;
             height: 2px;
@@ -107,15 +101,14 @@
 
         /* Section Headings */
         section {
-            padding: 30px 20px; /* Reduced padding */
+            padding: 20px 10px;
         }
         section h2 {
-            font-size: 2em; /* Reduced font size */
+            font-size: 1.5em;
             text-align: center;
-            margin-bottom: 20px; /* Reduced margin */
+            margin-bottom: 15px;
             color: var(--primary-color);
-            font-family: 'Rock Salt', cursive;
-            text-shadow: 2px 2px 8px rgba(0,229,255,0.7);
+            font-family: 'Lora', serif;
             word-wrap: break-word;
         }
 
@@ -124,43 +117,42 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px; /* Reduced gap */
+            gap: 10px;
         }
         .card {
-            background-color: var(--secondary-color);
+            background-color: var(--card-background);
             border-radius: 10px;
-            padding: 15px; /* Reduced padding */
+            padding: 15px;
             width: 100%;
-            max-width: 300px; /* Adjusted max-width */
+            max-width: 320px;
             color: var(--text-color);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
         .card:hover {
             transform: translateY(-5px);
         }
         .card h3 {
-            font-size: 1.5em; /* Reduced font size */
-            margin-bottom: 10px; /* Reduced margin */
-            font-family: 'Rock Salt', cursive;
-            color: var(--accent-color);
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
             word-wrap: break-word;
         }
         .card p {
-            font-size: 0.9em; /* Reduced font size */
-            margin-bottom: 15px; /* Reduced margin */
+            font-size: 0.9em;
+            margin-bottom: 10px;
         }
         .card a {
             display: inline-block;
             text-decoration: none;
-            background-color: var(--primary-color);
-            color: var(--background-color);
-            padding: 10px 20px; /* Reduced padding */
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 8px 15px;
             border-radius: 5px;
             font-weight: bold;
             transition: background-color 0.3s, transform 0.3s;
-            font-size: 0.9em; /* Reduced font size */
+            font-size: 0.8em;
         }
         .card a:hover {
             background-color: var(--accent-color);
@@ -170,7 +162,7 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 15px 0; /* Reduced padding */
+            padding: 10px 0;
             background-color: var(--background-color);
             color: var(--text-color);
             border-top: 1px solid var(--secondary-color);
@@ -178,24 +170,23 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            header h1 { font-size: 2.5em; }
-            section h2 { font-size: 1.8em; }
-            .card h3 { font-size: 1.3em; }
-            .card p { font-size: 0.85em; }
-            .card a { font-size: 0.85em; }
+            header h1 { font-size: 1.8em; }
+            section h2 { font-size: 1.3em; }
+            .card h3 { font-size: 1em; }
+            .card p { font-size: 0.8em; }
+            .card a { font-size: 0.8em; padding: 6px 12px; }
             nav {
-                gap: 10px;
+                gap: 5px;
             }
         }
 
         @media (max-width: 480px) {
-            header h1 { font-size: 2em; }
-            header p { font-size: 0.9em; }
-            section h2 { font-size: 1.5em; }
-            .card h3 { font-size: 1.1em; }
-            .card p { font-size: 0.8em; }
-            .card a { font-size: 0.8em; padding: 8px 15px; }
-            nav a { font-size: 0.9em; }
+            header h1 { font-size: 1.5em; }
+            section h2 { font-size: 1.2em; }
+            .card h3 { font-size: 0.9em; }
+            .card p { font-size: 0.75em; }
+            .card a { font-size: 0.75em; padding: 5px 10px; }
+            nav a { font-size: 0.8em; }
         }
     </style>
 </head>
@@ -203,11 +194,11 @@
 
 <header>
     <h1>AUSTINWRAP</h1>
-    <p></p>
+    <!-- Subtitle removed as per your request -->
 </header>
 
 <nav>
-    <a href="#projects">Games</a>
+    <a href="#projects">Projects</a>
     <a href="#social">Connect</a>
     <a href="#ecommerce">Shop</a>
 </nav>
@@ -219,7 +210,7 @@
         <div class="cards">
             <div class="card">
                 <h3>Bartending Game</h3>
-                <p>Run the bar, manage your resources, and make every drink count in this addictive game.</p>
+                <p>Run the bar, manage resources, and make every drink count in this addictive game.</p>
                 <a href="https://austinwrap.github.io/Bartend/" target="_blank">Check it Out</a>
             </div>
             <div class="card">
@@ -246,7 +237,7 @@
             </div>
             <div class="card">
                 <h3>Instagram</h3>
-                <p>Farm moments and tech highlights—a blend of life’s best.</p>
+                <p>Farm moments and tech highlights—a blend of life's best.</p>
                 <a href="https://www.instagram.com/austinwrap/" target="_blank">Follow Me</a>
             </div>
             <div class="card">
@@ -256,7 +247,7 @@
             </div>
             <div class="card">
                 <h3>Twitch</h3>
-                <p>Live streams from projects in action.</p>
+                <p>Live streams showcasing projects in action.</p>
                 <a href="https://www.twitch.tv/austinwrap_" target="_blank">Join Live</a>
             </div>
         </div>
@@ -268,7 +259,7 @@
         <div class="cards">
             <div class="card">
                 <h3>Mobile Bartending</h3>
-                <p>A complete web experience for the traveling bartender. Made for Raeanne’s service.</p>
+                <p>A complete web experience for the traveling bartender. Made for Raeanne's service.</p>
                 <a href="https://austinwrap.github.io/Mobile-Bartending/" target="_blank">Visit Site</a>
             </div>
             <div class="card">
