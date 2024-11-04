@@ -98,7 +98,7 @@
         }
         nav .container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
         nav .logo {
@@ -107,44 +107,7 @@
             color: var(--text-color);
             text-decoration: none;
         }
-        nav ul {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-        nav ul li {
-            position: relative;
-        }
-        nav ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 1.2em;
-            padding: 5px 0;
-            transition: color 0.3s;
-        }
-        nav ul li a:hover {
-            color: var(--button-color);
-        }
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0%;
-            height: 2px;
-            background: var(--button-color);
-            left: 50%;
-            bottom: -5px;
-            transition: width 0.3s ease, left 0.3s ease;
-        }
-        nav ul li a:hover::after {
-            width: 100%;
-            left: 0;
-        }
-        nav .menu-toggle {
-            display: none;
-            color: var(--text-color);
-            font-size: 1.8em;
-            cursor: pointer;
-        }
+        /* Removed nav ul and related styles */
 
         /* Sections */
         section {
@@ -272,9 +235,6 @@
             .card {
                 width: calc(50% - 50px);
             }
-            nav ul {
-                gap: 30px;
-            }
         }
         @media (max-width: 768px) {
             header h1 {
@@ -285,26 +245,6 @@
             }
             .card {
                 width: calc(100% - 50px);
-            }
-            nav ul {
-                flex-direction: column;
-                background: rgba(13, 13, 13, 0.95);
-                position: absolute;
-                top: var(--nav-height);
-                left: 0;
-                width: 100%;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.5s;
-            }
-            nav ul.open {
-                max-height: 300px;
-            }
-            nav ul li {
-                text-align: center;
-            }
-            nav .menu-toggle {
-                display: block;
             }
         }
     </style>
@@ -318,14 +258,6 @@
     <nav>
         <div class="container">
             <a href="#" class="logo">AUSTINWRAP</a>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul id="nav-menu">
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#social">Connect</a></li>
-                <li><a href="#ecommerce">Shop</a></li>
-            </ul>
         </div>
     </nav>
 
@@ -512,12 +444,6 @@
 
         function scrollToTop() {
             window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        /* Mobile Navigation Toggle */
-        function toggleMenu() {
-            var navMenu = document.getElementById("nav-menu");
-            navMenu.classList.toggle("open");
         }
     </script>
 </body>
