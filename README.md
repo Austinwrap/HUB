@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,9 +52,9 @@
 
         /* Container */
         .container {
-            max-width: 600px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
             position: relative;
             z-index: 1;
         }
@@ -62,12 +62,12 @@
         /* Header */
         header {
             text-align: center;
-            padding: 100px 20px 50px;
+            padding: 50px 20px 30px;
             color: #fff;
             position: relative;
         }
         header h1 {
-            font-size: 5em;
+            font-size: 4em;
             font-family: 'Orbitron', sans-serif;
             color: var(--button-color);
             text-shadow: 0 0 15px var(--button-color), 0 0 30px var(--button-color);
@@ -108,18 +108,17 @@
             color: var(--text-color);
             text-decoration: none;
         }
-        /* Removed nav ul and related styles */
 
         /* Sections */
         section {
-            padding: 100px 0;
+            padding: 50px 0;
             position: relative;
         }
         section h2 {
-            font-size: 3em;
+            font-size: 2.5em;
             color: var(--highlight-color);
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 40px;
             position: relative;
             z-index: 1;
             text-shadow: 0 0 10px var(--highlight-color);
@@ -134,16 +133,14 @@
 
         /* Cards */
         .cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
         .card {
             background: var(--card-background);
             border-radius: 15px;
-            padding: 40px 30px;
-            width: calc(33.333% - 50px);
+            padding: 20px;
             color: var(--text-color);
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
             position: relative;
@@ -151,9 +148,11 @@
             transition: transform 0.5s, box-shadow 0.5s;
             cursor: pointer;
             text-decoration: none;
+            display: flex;
+            flex-direction: column;
         }
         .card:hover {
-            transform: translateY(-20px);
+            transform: translateY(-10px);
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
         .card::before {
@@ -171,27 +170,29 @@
             opacity: 0.3;
         }
         .card h3 {
-            font-size: 2em;
-            margin-bottom: 20px;
+            font-size: 1.5em;
+            margin-bottom: 10px;
             font-family: 'Orbitron', sans-serif;
         }
         .card p {
             font-size: 1em;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             line-height: 1.6;
         }
         .card button {
-            display: inline-block;
+            display: block;
+            width: 100%;
             text-decoration: none;
             color: #fff;
             background: var(--button-color);
-            padding: 15px 40px;
+            padding: 10px 0;
             border-radius: 50px;
             font-weight: bold;
             font-size: 1em;
             transition: background 0.3s, transform 0.3s;
             border: none;
             cursor: pointer;
+            margin-top: auto;
         }
         .card button:hover {
             background: var(--button-hover-color);
@@ -201,7 +202,7 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 50px 20px;
+            padding: 30px 20px;
             background: var(--primary-color);
             color: var(--text-color);
             position: relative;
@@ -232,20 +233,20 @@
         }
 
         /* Responsive Design */
-        @media (max-width: 1024px) {
-            .card {
-                width: calc(50% - 50px);
-            }
-        }
         @media (max-width: 768px) {
             header h1 {
-                font-size: 3.5em;
+                font-size: 3em;
             }
             section h2 {
+                font-size: 2em;
+            }
+        }
+        @media (max-width: 480px) {
+            header h1 {
                 font-size: 2.5em;
             }
-            .card {
-                width: calc(100% - 50px);
+            section h2 {
+                font-size: 1.8em;
             }
         }
     </style>
