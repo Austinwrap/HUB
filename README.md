@@ -1,3 +1,4 @@
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -51,7 +52,7 @@
 
         /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
