@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>AUSTINWRAP</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.3, maximum-scale=0.3, user-scalable=no">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <!-- Include Font Awesome for icons -->
@@ -232,21 +231,58 @@
             transform: translateY(-5px);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 3em;
+        /* Adjustments for Mobile to Shrink Content */
+        @media (max-width: 480px) {
+            body {
+                transform: scale(0.5);
+                transform-origin: top left;
+                width: 200%;
+                overflow: hidden;
             }
-            section h2 {
+            nav {
+                height: calc(var(--nav-height) * 0.5);
+            }
+            header {
+                padding: 25px 10px 15px;
+            }
+            header h1 {
                 font-size: 2em;
             }
-        }
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 2.5em;
+            section {
+                padding: 25px 0;
             }
             section h2 {
-                font-size: 1.8em;
+                font-size: 1.25em;
+                margin-bottom: 20px;
+            }
+            .card {
+                padding: 10px;
+            }
+            .card h3 {
+                font-size: 0.75em;
+                margin-bottom: 5px;
+            }
+            .card p {
+                font-size: 0.5em;
+                margin-bottom: 10px;
+            }
+            .card button {
+                padding: 5px 0;
+                font-size: 0.5em;
+            }
+            footer {
+                padding: 15px 10px;
+            }
+            footer p {
+                font-size: 0.75em;
+            }
+            #scrollTopBtn {
+                width: 30px;
+                height: 30px;
+                font-size: 1em;
+                padding: 5px;
+                bottom: 15px;
+                right: 15px;
             }
         }
     </style>
@@ -450,3 +486,4 @@
     </script>
 </body>
 </html>
+
