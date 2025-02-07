@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AUSTINWRAP – Revised Edition</title>
+  <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Google Fonts & Font Awesome -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
@@ -199,8 +199,8 @@
   
   <!-- Hero Section -->
   <header id="home">
-    <h1>Welcome to AUSTINWRAP</h1>
-    <p>Experience sleek design, explosive interactivity, and pure creative innovation!</p>
+    <h1></h1>
+    <p></p>
   </header>
   
   <!-- Projects Section -->
