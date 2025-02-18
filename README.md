@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AUSTINWRAP - Manly Market Madness</title>
+  <title>AUSTINWRAP - Gambling Galore</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Enable mobile full-screen capabilities -->
+  <!-- Mobile full-screen capabilities -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <!-- Google Fonts & Font Awesome -->
@@ -42,7 +42,7 @@
       z-index: -1;
     }
     
-    /* Top Stock Ticker - Slower Animation, Abbreviated Symbols */
+    /* Top Stock Ticker with Abbreviated, Factual Symbols */
     .stock-ticker {
       position: fixed;
       top: 0;
@@ -73,7 +73,7 @@
       width: 100%;
       top: 45px; /* below ticker */
       left: 0;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0,0,0,0.9);
       padding: 10px 20px;
       display: flex;
       justify-content: space-between;
@@ -241,7 +241,7 @@
       color: #1A1A1A;
     }
     
-    /* Bottom Ticker - Slower & Refined with Factual Abbreviations */
+    /* Bottom Ticker with Factual Abbreviations */
     .beer-ticker {
       position: fixed;
       bottom: 0;
@@ -266,7 +266,7 @@
       100% { transform: translateX(-100%); }
     }
     
-    /* Bank Account Panel (Floating) with Draggable Header & Minimize Button */
+    /* Bank Account Panel (Draggable & Minimizable) */
     #bank-panel {
       position: fixed;
       right: 20px;
@@ -278,7 +278,7 @@
       width: 220px;
       box-shadow: 0 0 15px #00C6FF;
     }
-    /* Header for dragging and minimize control */
+    /* Header for dragging & minimize control */
     #bank-header {
       cursor: move;
       background: rgba(0,0,0,0.8);
@@ -316,6 +316,60 @@
       transition: background 0.3s;
     }
     #bank-content button:hover {
+      background: #00C6FF;
+      color: #1A1A1A;
+    }
+    
+    /* Mini Slots Panel (Draggable & Minimizable with Emojis) */
+    #slot-panel {
+      position: fixed;
+      right: 20px;
+      bottom: 300px;
+      background: rgba(0,0,0,0.9);
+      border: 2px solid #00C6FF;
+      border-radius: 10px;
+      z-index: 1700;
+      width: 220px;
+      box-shadow: 0 0 15px #00C6FF;
+    }
+    #slot-header {
+      cursor: move;
+      background: rgba(0,0,0,0.8);
+      padding: 5px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1em;
+      color: #00C6FF;
+    }
+    #minimize-slot {
+      background: transparent;
+      border: none;
+      color: #00C6FF;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    #slot-content {
+      padding: 10px;
+      text-align: center;
+    }
+    #slot-content input {
+      width: 100%;
+      margin-bottom: 5px;
+      padding: 5px;
+    }
+    #slot-content button {
+      margin: 5px 0;
+      width: 100%;
+      background: transparent;
+      border: 1px solid #00C6FF;
+      color: #00C6FF;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #slot-content button:hover {
       background: #00C6FF;
       color: #1A1A1A;
     }
@@ -389,23 +443,24 @@
       margin-top: 40px;
     }
     
-    /* Media Query to Scale Down Bank Panel on Small Screens */
+    /* Media Query to Scale Down Panels on Small Screens */
     @media (max-width: 480px) {
-      #bank-panel {
+      #bank-panel, #slot-panel {
         width: 180px;
         right: 10px;
+      }
+      #bank-panel {
         bottom: 80px;
+      }
+      #slot-panel {
+        bottom: 200px;
+      }
+      #bank-header, #slot-header {
+        font-size: 1em;
+      }
+      #bank-content p, #slot-content input, #slot-content button {
         font-size: 0.9em;
-      }
-      #bank-header {
-        font-size: 1em;
-      }
-      #bank-content p {
-        font-size: 1em;
-      }
-      #bank-content button {
         padding: 6px;
-        font-size: 0.8em;
       }
     }
   </style>
@@ -417,7 +472,7 @@
   <!-- Top Stock Ticker with Abbreviated, Factual Symbols -->
   <div class="stock-ticker">
     <span>
-      TRK: +350 | FMPR: +400 | CHKN: +250 | RSTR: +300 | MECH: +350 | BEER: +200 | BUS: +500 | TRCK: +450 | VAC: +75 | SILO: +300 | GRAIN: +400 | TIRE: +150 | ENG: +300 | PRD: +250 | EBK: +100 | PLNT: +320 | CATT: +280 | OIL: +210 | BBQ: +270 | DSH: +330
+      TRK:350 | FMPR:400 | CHKN:250 | RSTR:300 | MECH:350 | BEER:200 | BUS:500 | TRCK:450 | VAC:75 | SILO:300 | GRAIN:400 | TIRE:150 | ENG:300 | PRD:250 | EBK:100 | PLNT:320 | CATT:280 | OIL:210 | BBQ:270 | DSH:330
     </span>
   </div>
   
@@ -588,6 +643,19 @@
     </div>
   </div>
   
+  <!-- Mini Slots Panel (Draggable & Minimizable with Emojis) -->
+  <div id="slot-panel">
+    <div id="slot-header">
+      <span>Mini Slots</span>
+      <button id="minimize-slot">_</button>
+    </div>
+    <div id="slot-content">
+      <input type="number" id="slot-bet" placeholder="Bet amount" value="100">
+      <button id="spin-slots">Spin Slots</button>
+      <div id="slot-result"></div>
+    </div>
+  </div>
+  
   <!-- Transaction Ledger -->
   <div id="ledger">
     <h4>Transaction Ledger</h4>
@@ -604,13 +672,6 @@
       <button id="play-btn">Play</button>
       <div id="blackjack-result"></div>
     </div>
-  </div>
-  
-  <!-- Bottom Ticker with Factual Abbreviations -->
-  <div class="beer-ticker">
-    <span>
-      Did you know? TRK=350, FMPR=400, CHKN=250, RSTR=300, MECH=350, BEER=200, BUS=500, TRCK=450, VAC=75, SILO=300, GRAIN=400, TIRE=150, ENG=300, PRD=250, EBK=100, PLNT=320, CATT=280, OIL=210, BBQ=270, DSH=330
-    </span>
   </div>
   
   <footer>
@@ -678,50 +739,77 @@
       ledgerList.prepend(li);
     }
     
-    /* Blackjack Modal Functionality */
-    const blackjackModal = document.getElementById("blackjack-modal");
-    const closeButton = document.querySelector(".close-button");
-    document.getElementById("play-blackjack").addEventListener("click", () => {
-      blackjackModal.style.display = "block";
-    });
-    closeButton.addEventListener("click", () => {
-      blackjackModal.style.display = "none";
-      document.getElementById("blackjack-result").textContent = "";
-    });
-    window.addEventListener("click", (event) => {
-      if (event.target == blackjackModal) {
-        blackjackModal.style.display = "none";
-        document.getElementById("blackjack-result").textContent = "";
+    /* Blackjack Game Logic */
+    function getRandomCard() {
+      const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+      const suits = ["♠", "♥", "♦", "♣"];
+      let rank = ranks[Math.floor(Math.random() * ranks.length)];
+      let suit = suits[Math.floor(Math.random() * suits.length)];
+      let value = (rank === "A") ? 11 : (["J","Q","K"].includes(rank) ? 10 : parseInt(rank));
+      return { label: rank + suit, value: value };
+    }
+    function calculateTotal(cards) {
+      let total = cards.reduce((sum, card) => sum + card.value, 0);
+      let aceCount = cards.filter(card => card.label[0] === "A").length;
+      while (total > 21 && aceCount > 0) {
+        total -= 10;
+        aceCount--;
       }
-    });
+      return total;
+    }
+    function simulateBlackjack() {
+      let playerCards = [getRandomCard(), getRandomCard()];
+      let dealerCards = [getRandomCard(), getRandomCard()];
+      let playerTotal = calculateTotal(playerCards);
+      let dealerTotal = calculateTotal(dealerCards);
+      while (playerTotal < 17) {
+        playerCards.push(getRandomCard());
+        playerTotal = calculateTotal(playerCards);
+      }
+      while (dealerTotal < 17) {
+        dealerCards.push(getRandomCard());
+        dealerTotal = calculateTotal(dealerCards);
+      }
+      let outcome = "";
+      if (playerTotal > 21) outcome = "loss";
+      else if (dealerTotal > 21) outcome = "win";
+      else if (playerTotal > dealerTotal) outcome = "win";
+      else if (playerTotal < dealerTotal) outcome = "loss";
+      else outcome = "push";
+      return { playerCards, dealerCards, playerTotal, dealerTotal, outcome };
+    }
     
     document.getElementById("play-btn").addEventListener("click", () => {
-      const betInput = document.getElementById("blackjack-bet");
-      let bet = parseInt(betInput.value);
-      if(isNaN(bet) || bet <= 0 || bet > balance){
-        document.getElementById("blackjack-result").textContent = "Invalid bet amount!";
+      let bet = parseInt(document.getElementById("blackjack-bet").value);
+      if (isNaN(bet) || bet <= 0 || bet > balance) {
+        document.getElementById("blackjack-result").innerHTML = "Invalid bet amount!";
         return;
       }
-      // Simulate a quick blackjack outcome (50% chance win)
-      if(Math.random() < 0.5) {
+      let result = simulateBlackjack();
+      let resultStr = "Player: " + result.playerCards.map(c => c.label).join(", ") + " (Total: " + result.playerTotal + ")<br>";
+      resultStr += "Dealer: " + result.dealerCards.map(c => c.label).join(", ") + " (Total: " + result.dealerTotal + ")<br>";
+      if (result.outcome === "win") {
+        resultStr += "You win! +" + bet;
         balance += bet;
-        document.getElementById("blackjack-result").textContent = "You win! +" + bet;
         logTransaction("Blackjack Win: +" + bet);
-      } else {
+      } else if (result.outcome === "loss") {
+        resultStr += "You lose! -" + bet;
         balance -= bet;
-        document.getElementById("blackjack-result").textContent = "You lose! -" + bet;
         logTransaction("Blackjack Loss: -" + bet);
+      } else {
+        resultStr += "Push. No change.";
       }
+      document.getElementById("blackjack-result").innerHTML = resultStr;
       updateBalance();
-      betInput.value = "";
+      document.getElementById("blackjack-bet").value = "";
     });
     
     /* Other Bank Actions */
     document.getElementById("bet-all").addEventListener("click", () => {
-      if(balance <= 0) return;
+      if (balance <= 0) return;
       const bet = balance;
-      if(Math.random() < 0.5) {
-        balance += bet; // double
+      if (Math.random() < 0.5) {
+        balance += bet;
         logTransaction("All or Nothing Win: +" + bet);
         alert("Jackpot! You doubled your money!");
       } else {
@@ -732,9 +820,9 @@
       updateBalance();
     });
     document.getElementById("bet-10").addEventListener("click", () => {
-      if(balance <= 0) return;
+      if (balance <= 0) return;
       const bet = Math.floor(balance * 0.1);
-      if(Math.random() < 0.5) {
+      if (Math.random() < 0.5) {
         balance += bet;
         logTransaction("Bet 10% Win: +" + bet);
       } else {
@@ -745,7 +833,7 @@
     });
     document.getElementById("tip-jar").addEventListener("click", () => {
       const tip = 100;
-      if(balance < tip) return;
+      if (balance < tip) return;
       balance -= tip;
       logTransaction("Tip Jar Donation: -" + tip);
       updateBalance();
@@ -753,7 +841,7 @@
     });
     document.getElementById("trash-money").addEventListener("click", () => {
       const loss = 50;
-      if(balance < loss) return;
+      if (balance < loss) return;
       balance -= loss;
       logTransaction("Trash Money: -" + loss);
       updateBalance();
@@ -761,7 +849,7 @@
     });
     document.getElementById("donate-money").addEventListener("click", () => {
       const donation = 200;
-      if(balance < donation) return;
+      if (balance < donation) return;
       balance -= donation;
       logTransaction("Donation: -" + donation);
       updateBalance();
@@ -770,11 +858,42 @@
     
     updateBalance();
     
-    /* Draggable Bank Panel */
+    /* Mini Slots Logic with Cute Emoji Symbols */
+    const slotSymbols = ["🍒", "🍓", "🍇", "🍉", "🌸", "💖"];
+    document.getElementById("spin-slots").addEventListener("click", () => {
+      let bet = parseInt(document.getElementById("slot-bet").value);
+      if (isNaN(bet) || bet <= 0 || bet > balance) {
+        document.getElementById("slot-result").textContent = "Invalid bet amount!";
+        return;
+      }
+      let reel1 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+      let reel2 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+      let reel3 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+      
+      let outcomeText = "Reels: " + reel1 + " | " + reel2 + " | " + reel3 + "<br>";
+      if (reel1 === reel2 && reel2 === reel3) {
+        outcomeText += "Jackpot! You win 5x your bet: +" + (bet * 5);
+        balance += bet * 5;
+        logTransaction("Slots Jackpot: +" + (bet * 5));
+      } else if (reel1 === reel2 || reel1 === reel3 || reel2 === reel3) {
+        outcomeText += "Two in a row! You win 2x your bet: +" + (bet * 2);
+        balance += bet * 2;
+        logTransaction("Slots Win: +" + (bet * 2));
+      } else {
+        outcomeText += "No win. You lose: -" + bet;
+        balance -= bet;
+        logTransaction("Slots Loss: -" + bet);
+      }
+      document.getElementById("slot-result").innerHTML = outcomeText;
+      updateBalance();
+    });
+    
+    /* Draggable Panels */
     dragElement(document.getElementById("bank-panel"));
+    dragElement(document.getElementById("slot-panel"));
     function dragElement(elmnt) {
       var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-      var header = document.getElementById("bank-header");
+      var header = elmnt.querySelector("[id$='header']");
       if (header) {
         header.onmousedown = dragMouseDown;
       } else {
@@ -804,7 +923,7 @@
       }
     }
     
-    /* Minimize/Restore Bank Panel */
+    /* Minimize/Restore Panels */
     document.getElementById("minimize-bank").addEventListener("click", function() {
       var content = document.getElementById("bank-content");
       if(content.style.display === "none"){
@@ -813,6 +932,33 @@
       } else {
          content.style.display = "none";
          this.textContent = "+";
+      }
+    });
+    document.getElementById("minimize-slot").addEventListener("click", function() {
+      var content = document.getElementById("slot-content");
+      if(content.style.display === "none"){
+         content.style.display = "block";
+         this.textContent = "_";
+      } else {
+         content.style.display = "none";
+         this.textContent = "+";
+      }
+    });
+    
+    /* Blackjack Modal Functionality */
+    const blackjackModal = document.getElementById("blackjack-modal");
+    const closeButton = document.querySelector(".close-button");
+    document.getElementById("play-blackjack").addEventListener("click", () => {
+      blackjackModal.style.display = "block";
+    });
+    closeButton.addEventListener("click", () => {
+      blackjackModal.style.display = "none";
+      document.getElementById("blackjack-result").innerHTML = "";
+    });
+    window.addEventListener("click", (event) => {
+      if (event.target == blackjackModal) {
+        blackjackModal.style.display = "none";
+        document.getElementById("blackjack-result").innerHTML = "";
       }
     });
   </script>
