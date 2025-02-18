@@ -42,7 +42,7 @@
       z-index: -1;
     }
     
-    /* Top Stock Ticker (Manly Market Updates) - Slower Animation */
+    /* Top Stock Ticker - Slower Animation, Abbreviated Symbols */
     .stock-ticker {
       position: fixed;
       top: 0;
@@ -67,7 +67,7 @@
       100% { transform: translateX(-100%); }
     }
     
-    /* Navigation (with drop-down for account) */
+    /* Navigation (with dropdown for Account) */
     nav {
       position: fixed;
       width: 100%;
@@ -241,7 +241,7 @@
       color: #1A1A1A;
     }
     
-    /* Bottom Ticker - Slower & Refined */
+    /* Bottom Ticker - Slower & Refined with Factual Abbreviations */
     .beer-ticker {
       position: fixed;
       bottom: 0;
@@ -266,30 +266,45 @@
       100% { transform: translateX(-100%); }
     }
     
-    /* Bank Account Panel (Floating) */
+    /* Bank Account Panel (Floating) with Draggable Header & Minimize Button */
     #bank-panel {
       position: fixed;
       right: 20px;
       bottom: 120px;
       background: rgba(0,0,0,0.9);
-      padding: 15px;
       border: 2px solid #00C6FF;
       border-radius: 10px;
       z-index: 1700;
       width: 220px;
-      text-align: center;
       box-shadow: 0 0 15px #00C6FF;
     }
-    #bank-panel h3 {
-      margin-bottom: 10px;
+    /* Header for dragging and minimize control */
+    #bank-header {
+      cursor: move;
+      background: rgba(0,0,0,0.8);
+      padding: 5px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1em;
       color: #00C6FF;
-      font-family: 'Playfair Display', serif;
     }
-    #bank-panel p {
+    #minimize-bank {
+      background: transparent;
+      border: none;
+      color: #00C6FF;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    #bank-content {
+      padding: 10px;
+      text-align: center;
+    }
+    #bank-content p {
       font-size: 1.2em;
       margin-bottom: 10px;
     }
-    #bank-panel button {
+    #bank-content button {
       margin: 5px 0;
       width: 100%;
       background: transparent;
@@ -300,7 +315,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    #bank-panel button:hover {
+    #bank-content button:hover {
       background: #00C6FF;
       color: #1A1A1A;
     }
@@ -373,16 +388,36 @@
       color: #777;
       margin-top: 40px;
     }
+    
+    /* Media Query to Scale Down Bank Panel on Small Screens */
+    @media (max-width: 480px) {
+      #bank-panel {
+        width: 180px;
+        right: 10px;
+        bottom: 80px;
+        font-size: 0.9em;
+      }
+      #bank-header {
+        font-size: 1em;
+      }
+      #bank-content p {
+        font-size: 1em;
+      }
+      #bank-content button {
+        padding: 6px;
+        font-size: 0.8em;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Particle Background Canvas -->
   <canvas id="particle-canvas"></canvas>
   
-  <!-- Top Stock Ticker -->
+  <!-- Top Stock Ticker with Abbreviated, Factual Symbols -->
   <div class="stock-ticker">
     <span>
-      Trucking Empire: +350 | Farm Produce: +400 | Chicken Coop: +250 | Barnyard Business: +300 | Diesel Dreams: +450 | Heavy Haul: +500 | Rugged Ranch: +400 | Mechanic Might: +350 | Engine Roar: +300 | Barbecue Blitz: +250 | Steakhouse Surge: +300 | Oil Change: +200 | Wrench Wonders: +150 | Hog Ties: +100 | Farming Frontier: +350 | Tractor Power: +500 | Grain Gains: +450 | Harvest Hustle: +400 | Cattle Charge: +350 | Poultry Power: +300 | Silo Success: +400 | Barn Burner: +250 | Diesel Dominance: +500 | Truckin' Titan: +450 | Business Boom: +400 | Steel & Grit: +350 | Industrial Impact: +300 | Mechanic Momentum: +250 | Gear Grind: +200 | Drill Down: +150 | Engine Excellence: +500 | Rugged Roads: +400 | Mighty Machines: +350 | Fortune Found: +300 | Raw Resources: +250 | Agricultural Advance: +400 | Produce Profit: +350 | Livestock Leap: +300 | Farmstead Fortune: +250 | Market Mastery: +200 | Trucking Triumph: +500 | Heavy Hauling: +450 | Freight Flow: +400 | Route Ruler: +350 | Cargo Commander: +300 | Diesel Dynasty: +250 | Rig Rumble: +200 | Mechanic Marvel: +150 | Tool Time: +100 | Engine Envy: +500 | Overdrive: +450 | Speed Shift: +400 | Piston Power: +350 | Torque Titan: +300 | Grit and Grind: +250 | Truck Stop: +200 | Farming Fever: +150 | Country Capital: +100
+      TRK: +350 | FMPR: +400 | CHKN: +250 | RSTR: +300 | MECH: +350 | BEER: +200 | BUS: +500 | TRCK: +450 | VAC: +75 | SILO: +300 | GRAIN: +400 | TIRE: +150 | ENG: +300 | PRD: +250 | EBK: +100 | PLNT: +320 | CATT: +280 | OIL: +210 | BBQ: +270 | DSH: +330
     </span>
   </div>
   
@@ -536,16 +571,21 @@
     </div>
   </section>
   
-  <!-- Bank Account Panel -->
+  <!-- Bank Account Panel (Draggable & Minimizable) -->
   <div id="bank-panel">
-    <h3>Bank Account</h3>
-    <p id="account-balance">$1,000,000</p>
-    <button id="play-blackjack">Play Blackjack</button>
-    <button id="bet-all">All or Nothing</button>
-    <button id="bet-10">Bet 10%</button>
-    <button id="tip-jar">Tip Jar</button>
-    <button id="trash-money">Trash Money</button>
-    <button id="donate-money">Donate</button>
+    <div id="bank-header">
+      <span>Bank Account</span>
+      <button id="minimize-bank">_</button>
+    </div>
+    <div id="bank-content">
+      <p id="account-balance">$1,000,000</p>
+      <button id="play-blackjack">Play Blackjack</button>
+      <button id="bet-all">All or Nothing</button>
+      <button id="bet-10">Bet 10%</button>
+      <button id="tip-jar">Tip Jar</button>
+      <button id="trash-money">Trash Money</button>
+      <button id="donate-money">Donate</button>
+    </div>
   </div>
   
   <!-- Transaction Ledger -->
@@ -564,6 +604,13 @@
       <button id="play-btn">Play</button>
       <div id="blackjack-result"></div>
     </div>
+  </div>
+  
+  <!-- Bottom Ticker with Factual Abbreviations -->
+  <div class="beer-ticker">
+    <span>
+      Did you know? TRK=350, FMPR=400, CHKN=250, RSTR=300, MECH=350, BEER=200, BUS=500, TRCK=450, VAC=75, SILO=300, GRAIN=400, TIRE=150, ENG=300, PRD=250, EBK=100, PLNT=320, CATT=280, OIL=210, BBQ=270, DSH=330
+    </span>
   </div>
   
   <footer>
@@ -722,6 +769,52 @@
     });
     
     updateBalance();
+    
+    /* Draggable Bank Panel */
+    dragElement(document.getElementById("bank-panel"));
+    function dragElement(elmnt) {
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      var header = document.getElementById("bank-header");
+      if (header) {
+        header.onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    
+    /* Minimize/Restore Bank Panel */
+    document.getElementById("minimize-bank").addEventListener("click", function() {
+      var content = document.getElementById("bank-content");
+      if(content.style.display === "none"){
+         content.style.display = "block";
+         this.textContent = "_";
+      } else {
+         content.style.display = "none";
+         this.textContent = "+";
+      }
+    });
   </script>
 </body>
 </html>
