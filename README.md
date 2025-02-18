@@ -1,22 +1,29 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>AUSTINWRAP - Manly Market Madness</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Enable mobile full-screen capabilities -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <!-- Google Fonts & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Playfair+Display:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Global Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    /* Body & Background: Deep Blue–Teal Gradient */
     body {
       font-family: 'Montserrat', sans-serif;
-      /* Grey–Blue Gradient Background */
-      background: linear-gradient(135deg, #5D6D7E, #34495E);
+      background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
       background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
+      animation: gradientBG 20s ease infinite;
       overflow-x: hidden;
-      color: #eee;
+      color: #EEE;
+      position: relative;
+      padding-bottom: 150px; /* room for ledger */
     }
     @keyframes gradientBG {
       0%   { background-position: 0% 50%; }
@@ -24,53 +31,116 @@
       100% { background-position: 0% 50%; }
     }
     
-    /* Navigation */
+    /* Particle Background Canvas */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Top Stock Ticker (Manly Market Updates) - Slower Animation */
+    .stock-ticker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.85);
+      color: #00C6FF;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      white-space: nowrap;
+      overflow: hidden;
+      z-index: 1600;
+      text-shadow: 0 0 8px #00C6FF;
+    }
+    .stock-ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker-top 40s linear infinite;
+    }
+    @keyframes ticker-top {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    /* Navigation (with drop-down for account) */
     nav {
       position: fixed;
       width: 100%;
-      top: 0;
+      top: 45px; /* below ticker */
       left: 0;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.9);
       padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      z-index: 1500;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
     }
     nav .logo {
+      font-family: 'Playfair Display', serif;
       font-size: 2em;
       font-weight: bold;
-      color: #81D4FA;
+      color: #00C6FF;
+      text-shadow: 0 0 10px #00C6FF;
     }
     nav ul {
       list-style: none;
       display: flex;
       gap: 15px;
     }
+    nav ul li {
+      position: relative;
+    }
     nav ul li a {
       text-decoration: none;
-      color: #eee;
+      color: #EEE;
       font-weight: 600;
       transition: color 0.3s;
     }
-    nav ul li a:hover { color: #81D4FA; }
+    nav ul li a:hover { 
+      color: #00C6FF;
+    }
+    /* Dropdown styling */
+    nav ul li .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(0,0,0,0.95);
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+      z-index: 1700;
+    }
+    nav ul li:hover .dropdown {
+      display: block;
+    }
+    nav ul li .dropdown li {
+      margin: 5px 0;
+    }
+    nav ul li .dropdown li a {
+      color: #EEE;
+    }
     .hamburger {
       display: none;
       font-size: 1.5em;
       cursor: pointer;
-      color: #eee;
+      color: #EEE;
     }
     @media (max-width: 768px) {
       nav ul {
         display: none;
         flex-direction: column;
         position: fixed;
-        top: 60px;
+        top: 55px;
         right: 0;
-        background: rgba(0,0,0,0.9);
+        background: rgba(0,0,0,0.95);
         padding: 20px;
-        box-shadow: -2px 2px 5px rgba(0,0,0,0.5);
+        box-shadow: -2px 2px 5px rgba(0,0,0,0.7);
       }
       nav ul.show { display: flex; }
       .hamburger { display: block; }
@@ -78,31 +148,40 @@
     
     /* Hero Section */
     header {
-      padding: 20px 10px;
+      padding: 100px 10px 20px;
       text-align: center;
-      margin-top: 60px; /* Allow room for the fixed nav */
+      margin-top: 80px;
     }
     header h1 {
-      font-size: 2.8em;
+      font-family: 'Playfair Display', serif;
+      font-size: 3em;
       margin-bottom: 10px;
-      color: #81D4FA;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+      color: #00C6FF;
+      text-shadow: 0 0 10px #00C6FF;
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
     header p {
       font-size: 1.2em;
       margin-bottom: 20px;
-      color: #ccc;
+      color: #CCC;
     }
     
-    /* Sections */
+    /* Sections (Projects, Social, Shop) */
     section {
       padding: 50px 20px;
       text-align: center;
     }
     section h2 {
+      font-family: 'Playfair Display', serif;
       font-size: 2.5em;
       margin-bottom: 20px;
-      color: #81D4FA;
+      color: #00C6FF;
+      text-shadow: 0 0 8px #00C6FF;
     }
     .section-content {
       max-width: 1200px;
@@ -113,79 +192,200 @@
       justify-content: center;
     }
     
-    /* Cards (Icon Based, with Direct External Links) */
+    /* Cards with Neon-Cyan Accents */
     .card {
-      background: #333;
-      border-radius: 20px;
+      background: #1A1A1A;
+      border-radius: 10px;
       width: 280px;
-      padding: 15px;
-      box-shadow: 0 8px 12px rgba(0,0,0,0.5);
-      transition: transform 0.3s;
+      padding: 20px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
       text-decoration: none;
-      color: inherit;
+      color: #EEE;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid transparent;
     }
-    .card:hover { transform: scale(1.04); }
+    .card:hover { 
+      transform: scale(1.03);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.8), 0 0 10px #00C6FF;
+      border: 1px solid #00C6FF;
+    }
     .card-icon {
       font-size: 3rem;
       margin-bottom: 10px;
-      color: #81D4FA;
+      color: #00C6FF;
+      text-shadow: 0 0 8px #00C6FF;
     }
     .card h3 {
       margin-bottom: 8px;
-      font-size: 1.3em;
-      color: #81D4FA;
+      font-size: 1.5em;
+      color: #00C6FF;
     }
     .card p {
-      font-size: 0.95em;
-      color: #ccc;
-      margin-bottom: 10px;
+      font-size: 1em;
+      color: #CCC;
+      margin-bottom: 15px;
     }
     .card button {
-      background: #81D4FA;
-      color: #fff;
-      border: none;
+      background: transparent;
+      border: 2px solid #00C6FF;
+      color: #00C6FF;
       padding: 8px 16px;
-      border-radius: 20px;
+      border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s, color 0.3s;
     }
-    .card button:hover { background: #6EC1E4; }
+    .card button:hover { 
+      background: #00C6FF;
+      color: #1A1A1A;
+    }
     
-    /* Beer Facts Ticker */
+    /* Bottom Ticker - Slower & Refined */
     .beer-ticker {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #81D4FA;
-      color: #fff;
-      padding: 8px 15px;
-      font-size: 1em;
+      background: rgba(0,0,0,0.8);
+      color: #00C6FF;
+      padding: 15px 20px;
+      font-size: 1.2em;
       white-space: nowrap;
       overflow: hidden;
       z-index: 1500;
+      text-shadow: 0 0 8px #00C6FF;
     }
     .beer-ticker span {
       display: inline-block;
       padding-left: 100%;
-      animation: ticker 20s linear infinite;
+      animation: ticker 40s linear infinite;
     }
     @keyframes ticker {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
     
+    /* Bank Account Panel (Floating) */
+    #bank-panel {
+      position: fixed;
+      right: 20px;
+      bottom: 120px;
+      background: rgba(0,0,0,0.9);
+      padding: 15px;
+      border: 2px solid #00C6FF;
+      border-radius: 10px;
+      z-index: 1700;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 0 15px #00C6FF;
+    }
+    #bank-panel h3 {
+      margin-bottom: 10px;
+      color: #00C6FF;
+      font-family: 'Playfair Display', serif;
+    }
+    #bank-panel p {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    #bank-panel button {
+      margin: 5px 0;
+      width: 100%;
+      background: transparent;
+      border: 1px solid #00C6FF;
+      color: #00C6FF;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #bank-panel button:hover {
+      background: #00C6FF;
+      color: #1A1A1A;
+    }
+    
+    /* Ledger at the Bottom */
+    #ledger {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      max-height: 100px;
+      overflow-y: auto;
+      background: rgba(0,0,0,0.85);
+      color: #00C6FF;
+      padding: 10px 20px;
+      font-size: 0.9em;
+      z-index: 1800;
+      border-top: 2px solid #00C6FF;
+    }
+    #ledger h4 {
+      margin-bottom: 5px;
+    }
+    #ledger ul {
+      list-style: none;
+      max-height: 70px;
+      overflow-y: auto;
+    }
+    #ledger li {
+      margin-bottom: 3px;
+    }
+    
+    /* Blackjack Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1900;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.8);
+    }
+    .modal-content {
+      background: #1A1A1A;
+      margin: 10% auto;
+      padding: 20px;
+      border: 2px solid #00C6FF;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+      color: #EEE;
+      text-align: center;
+      position: relative;
+    }
+    .close-button {
+      color: #00C6FF;
+      float: right;
+      font-size: 1.5em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
     /* Footer */
     footer {
       padding: 20px 10px;
-      background: #222;
+      background: #0F2027;
       text-align: center;
       font-size: 0.9em;
       color: #777;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
+  <!-- Particle Background Canvas -->
+  <canvas id="particle-canvas"></canvas>
+  
+  <!-- Top Stock Ticker -->
+  <div class="stock-ticker">
+    <span>
+      Trucking Empire: +350 | Farm Produce: +400 | Chicken Coop: +250 | Barnyard Business: +300 | Diesel Dreams: +450 | Heavy Haul: +500 | Rugged Ranch: +400 | Mechanic Might: +350 | Engine Roar: +300 | Barbecue Blitz: +250 | Steakhouse Surge: +300 | Oil Change: +200 | Wrench Wonders: +150 | Hog Ties: +100 | Farming Frontier: +350 | Tractor Power: +500 | Grain Gains: +450 | Harvest Hustle: +400 | Cattle Charge: +350 | Poultry Power: +300 | Silo Success: +400 | Barn Burner: +250 | Diesel Dominance: +500 | Truckin' Titan: +450 | Business Boom: +400 | Steel & Grit: +350 | Industrial Impact: +300 | Mechanic Momentum: +250 | Gear Grind: +200 | Drill Down: +150 | Engine Excellence: +500 | Rugged Roads: +400 | Mighty Machines: +350 | Fortune Found: +300 | Raw Resources: +250 | Agricultural Advance: +400 | Produce Profit: +350 | Livestock Leap: +300 | Farmstead Fortune: +250 | Market Mastery: +200 | Trucking Triumph: +500 | Heavy Hauling: +450 | Freight Flow: +400 | Route Ruler: +350 | Cargo Commander: +300 | Diesel Dynasty: +250 | Rig Rumble: +200 | Mechanic Marvel: +150 | Tool Time: +100 | Engine Envy: +500 | Overdrive: +450 | Speed Shift: +400 | Piston Power: +350 | Torque Titan: +300 | Grit and Grind: +250 | Truck Stop: +200 | Farming Fever: +150 | Country Capital: +100
+    </span>
+  </div>
+  
   <!-- Navigation -->
   <nav id="navbar">
     <div class="logo">AUSTINWRAP</div>
@@ -194,13 +394,20 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#social">Social</a></li>
       <li><a href="#shop">Shop</a></li>
+      <li>
+        <a href="#">Account <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="#bank-panel">Bank</a></li>
+          <li><a href="#ledger">Ledger</a></li>
+        </ul>
+      </li>
     </ul>
   </nav>
   
   <!-- Hero Section -->
   <header id="home">
-    <h1></h1>
-    <p></p>
+    <h1>Welcome to AUSTINWRAP</h1>
+    <p>Experience a dark blend of raw creativity and non‑stop action.</p>
   </header>
   
   <!-- Projects Section -->
@@ -211,21 +418,35 @@
       <a class="card" href="https://austinwrap.github.io/Bartend/" target="_blank">
         <div class="card-icon"><i class="fas fa-cocktail"></i></div>
         <h3>Bartending Game</h3>
-        <p>Mix drinks, manage your bar, and dive into wild simulations.</p>
+        <p>Mix drinks and manage your bar in an engaging simulation.</p>
         <button>Learn More</button>
       </a>
       <!-- Card 2: Chicken Farm Game -->
       <a class="card" href="https://austinwrap.github.io/FrostyFarms/" target="_blank">
         <div class="card-icon"><i class="fas fa-drumstick-bite"></i></div>
         <h3>Chicken Farm Game</h3>
-        <p>Raise your quirky flock and harvest the fun!</p>
+        <p>Raise your quirky flock and enjoy a farm twist.</p>
         <button>Learn More</button>
       </a>
       <!-- Card 3: Bristol Tycoon -->
       <a class="card" href="https://austinwrap.github.io/BristolTycoon/" target="_blank">
         <div class="card-icon"><i class="fas fa-building"></i></div>
         <h3>Bristol Tycoon</h3>
-        <p>Build your empire and rule the town in outrageous style.</p>
+        <p>Build your empire with sophisticated strategy.</p>
+        <button>Learn More</button>
+      </a>
+      <!-- Card 4: Bad Mailman -->
+      <a class="card" href="https://austinwrap.github.io/bad-mailman/" target="_blank">
+        <div class="card-icon"><i class="fas fa-envelope"></i></div>
+        <h3>Bad Mailman</h3>
+        <p>A quirky twist on the classic mail journey.</p>
+        <button>Learn More</button>
+      </a>
+      <!-- Card 5: Feminine Stocks Simulator -->
+      <a class="card" href="https://austinwrap.github.io/feminine-stocks/" target="_blank">
+        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Feminine Stocks Simulator</h3>
+        <p>Dive into a satirical stock market simulation with a twist.</p>
         <button>Learn More</button>
       </a>
     </div>
@@ -239,28 +460,28 @@
       <a class="card" href="https://www.youtube.com/@austinwrap" target="_blank">
         <div class="card-icon"><i class="fab fa-youtube"></i></div>
         <h3>YouTube</h3>
-        <p>Watch creative projects and behind-the-scenes content.</p>
+        <p>Watch behind‑the‑scenes and creative explorations.</p>
         <button>Visit Channel</button>
       </a>
       <!-- Social Card 2: Instagram -->
       <a class="card" href="https://www.instagram.com/austinwrap" target="_blank">
         <div class="card-icon"><i class="fab fa-instagram"></i></div>
         <h3>Instagram</h3>
-        <p>Follow for vibrant, off-the-wall moments.</p>
+        <p>Follow for tasteful moments and creative insights.</p>
         <button>Follow Me</button>
       </a>
       <!-- Social Card 3: TikTok -->
       <a class="card" href="https://www.tiktok.com/@austinwrap" target="_blank">
         <div class="card-icon"><i class="fab fa-tiktok"></i></div>
         <h3>TikTok</h3>
-        <p>Short bursts of creative energy and fun!</p>
+        <p>Enjoy quick bursts of creative flair and fun.</p>
         <button>Watch Now</button>
       </a>
       <!-- Social Card 4: Twitch -->
       <a class="card" href="https://www.twitch.tv/austinwrap_" target="_blank">
         <div class="card-icon"><i class="fab fa-twitch"></i></div>
         <h3>Twitch</h3>
-        <p>Join live sessions full of interactive surprises.</p>
+        <p>Join live sessions filled with interactive entertainment.</p>
         <button>Join Live</button>
       </a>
     </div>
@@ -274,63 +495,233 @@
       <a class="card" href="https://austinwrap.github.io/Mobile-Bartending/" target="_blank">
         <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
         <h3>Mobile Bartending</h3>
-        <p>Experience a full-service bartending web extravaganza.</p>
+        <p>Experience a full‑service bartending experience online.</p>
         <button>Visit Site</button>
       </a>
       <!-- Shop Card 2: Roundhouse Powerwash LLC -->
       <a class="card" href="https://austinwrap.github.io/Powerwash/" target="_blank">
         <div class="card-icon"><i class="fas fa-water"></i></div>
         <h3>Roundhouse Powerwash LLC</h3>
-        <p>Keep your space spotless with pro power washing.</p>
+        <p>Professional power washing for a pristine space.</p>
         <button>Learn More</button>
       </a>
       <!-- Shop Card 3: Etsy Shop -->
       <a class="card" href="https://www.etsy.com/shop/MyFavoriteAlien" target="_blank">
         <div class="card-icon"><i class="fas fa-shopping-bag"></i></div>
         <h3>Etsy Shop</h3>
-        <p>Find unique, creative merch that celebrates our journey.</p>
+        <p>Discover unique merchandise with a refined twist.</p>
         <button>Explore</button>
       </a>
       <!-- Shop Card 4: My Book on Amazon -->
       <a class="card" href="https://a.co/d/3AiLY0d" target="_blank">
         <div class="card-icon"><i class="fas fa-book"></i></div>
         <h3>My Book on Amazon</h3>
-        <p>Dive into my creative adventures and learn from the chaos.</p>
+        <p>Explore creative journeys through literature.</p>
         <button>Buy Now</button>
       </a>
       <!-- Shop Card 5: Affirmations Journal -->
       <a class="card" href="https://a.co/d/bF8FTHW" target="_blank">
         <div class="card-icon"><i class="fas fa-book-open"></i></div>
         <h3>Affirmations Journal</h3>
-        <p>Fuel your daily creativity with affirmations and positive vibes.</p>
+        <p>Inspire your daily routine with thoughtful reflections.</p>
         <button>Get it Here</button>
       </a>
       <!-- Shop Card 6: CT Draft -->
       <a class="card" href="http://www.ctdraft.com" target="_blank">
         <div class="card-icon"><i class="fas fa-industry"></i></div>
         <h3>CT Draft</h3>
-        <p>Explore our high-quality draft services that bring order to creative chaos.</p>
+        <p>Explore high‑quality draft services tailored to your needs.</p>
         <button>Learn More</button>
       </a>
     </div>
   </section>
   
-  <!-- Beer Facts Ticker -->
-  <div class="beer-ticker">
-    <span id="beer-facts">
-      Did you know? The oldest beer recipe dates back to 1800 BC. | Beer was once a safe alternative to water. | The Czech Republic leads in per capita beer consumption. | Cheers to fun beer facts!
-    </span>
+  <!-- Bank Account Panel -->
+  <div id="bank-panel">
+    <h3>Bank Account</h3>
+    <p id="account-balance">$1,000,000</p>
+    <button id="play-blackjack">Play Blackjack</button>
+    <button id="bet-all">All or Nothing</button>
+    <button id="bet-10">Bet 10%</button>
+    <button id="tip-jar">Tip Jar</button>
+    <button id="trash-money">Trash Money</button>
+    <button id="donate-money">Donate</button>
   </div>
   
-  <script>
-    // Toggle Hamburger Menu on Mobile
-    document.getElementById('hamburger').addEventListener('click', function() {
-      document.getElementById('nav-links').classList.toggle('show');
-    });
-  </script>
+  <!-- Transaction Ledger -->
+  <div id="ledger">
+    <h4>Transaction Ledger</h4>
+    <ul id="ledger-list"></ul>
+  </div>
+  
+  <!-- Blackjack Modal -->
+  <div id="blackjack-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Blackjack Game</h2>
+      <p>Enter your bet:</p>
+      <input type="number" id="blackjack-bet" placeholder="Bet amount">
+      <button id="play-btn">Play</button>
+      <div id="blackjack-result"></div>
+    </div>
+  </div>
   
   <footer>
     <p>&copy; 2024 AUSTINWRAP. All Rights Reserved.</p>
   </footer>
+  
+  <script>
+    /* Particle Background Effect */
+    const canvas = document.getElementById("particle-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    const particleCount = 100;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    function Particle() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.radius = Math.random() * 2 + 1;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+    }
+    Particle.prototype.update = function() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+      if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+    }
+    Particle.prototype.draw = function() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      ctx.fillStyle = "#00C6FF";
+      ctx.fill();
+    }
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    initParticles();
+    animateParticles();
+    
+    /* Fake Bank Account & Ledger Logic */
+    let balance = 1000000;
+    const balanceDisplay = document.getElementById("account-balance");
+    const ledgerList = document.getElementById("ledger-list");
+    function updateBalance() {
+      balanceDisplay.textContent = "$" + balance.toLocaleString();
+    }
+    function logTransaction(message) {
+      const li = document.createElement("li");
+      li.textContent = message;
+      ledgerList.prepend(li);
+    }
+    
+    /* Blackjack Modal Functionality */
+    const blackjackModal = document.getElementById("blackjack-modal");
+    const closeButton = document.querySelector(".close-button");
+    document.getElementById("play-blackjack").addEventListener("click", () => {
+      blackjackModal.style.display = "block";
+    });
+    closeButton.addEventListener("click", () => {
+      blackjackModal.style.display = "none";
+      document.getElementById("blackjack-result").textContent = "";
+    });
+    window.addEventListener("click", (event) => {
+      if (event.target == blackjackModal) {
+        blackjackModal.style.display = "none";
+        document.getElementById("blackjack-result").textContent = "";
+      }
+    });
+    
+    document.getElementById("play-btn").addEventListener("click", () => {
+      const betInput = document.getElementById("blackjack-bet");
+      let bet = parseInt(betInput.value);
+      if(isNaN(bet) || bet <= 0 || bet > balance){
+        document.getElementById("blackjack-result").textContent = "Invalid bet amount!";
+        return;
+      }
+      // Simulate a quick blackjack outcome (50% chance win)
+      if(Math.random() < 0.5) {
+        balance += bet;
+        document.getElementById("blackjack-result").textContent = "You win! +" + bet;
+        logTransaction("Blackjack Win: +" + bet);
+      } else {
+        balance -= bet;
+        document.getElementById("blackjack-result").textContent = "You lose! -" + bet;
+        logTransaction("Blackjack Loss: -" + bet);
+      }
+      updateBalance();
+      betInput.value = "";
+    });
+    
+    /* Other Bank Actions */
+    document.getElementById("bet-all").addEventListener("click", () => {
+      if(balance <= 0) return;
+      const bet = balance;
+      if(Math.random() < 0.5) {
+        balance += bet; // double
+        logTransaction("All or Nothing Win: +" + bet);
+        alert("Jackpot! You doubled your money!");
+      } else {
+        balance = 0;
+        logTransaction("All or Nothing Loss: Lost it all!");
+        alert("Ouch! You lost everything!");
+      }
+      updateBalance();
+    });
+    document.getElementById("bet-10").addEventListener("click", () => {
+      if(balance <= 0) return;
+      const bet = Math.floor(balance * 0.1);
+      if(Math.random() < 0.5) {
+        balance += bet;
+        logTransaction("Bet 10% Win: +" + bet);
+      } else {
+        balance -= bet;
+        logTransaction("Bet 10% Loss: -" + bet);
+      }
+      updateBalance();
+    });
+    document.getElementById("tip-jar").addEventListener("click", () => {
+      const tip = 100;
+      if(balance < tip) return;
+      balance -= tip;
+      logTransaction("Tip Jar Donation: -" + tip);
+      updateBalance();
+      alert("Thank you for the tip!");
+    });
+    document.getElementById("trash-money").addEventListener("click", () => {
+      const loss = 50;
+      if(balance < loss) return;
+      balance -= loss;
+      logTransaction("Trash Money: -" + loss);
+      updateBalance();
+      alert("You threw some money away!");
+    });
+    document.getElementById("donate-money").addEventListener("click", () => {
+      const donation = 200;
+      if(balance < donation) return;
+      balance -= donation;
+      logTransaction("Donation: -" + donation);
+      updateBalance();
+      alert("Thank you for your donation!");
+    });
+    
+    updateBalance();
+  </script>
 </body>
 </html>
