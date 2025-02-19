@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -269,13 +268,13 @@
     /* Bank Account Panel (Draggable & Minimizable) */
     #bank-panel {
       position: fixed;
-      right: 20px;
-      bottom: 120px;
+      right: 10px;
+      bottom: 100px;
       background: rgba(0,0,0,0.9);
       border: 2px solid #00C6FF;
       border-radius: 10px;
       z-index: 1700;
-      width: 220px;
+      width: 180px;
       box-shadow: 0 0 15px #00C6FF;
     }
     /* Header for dragging & minimize control */
@@ -286,7 +285,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 1.1em;
+      font-size: 1em;
       color: #00C6FF;
     }
     #minimize-bank {
@@ -301,7 +300,7 @@
       text-align: center;
     }
     #bank-content p {
-      font-size: 1.2em;
+      font-size: 1.1em;
       margin-bottom: 10px;
     }
     #bank-content button {
@@ -321,16 +320,15 @@
     }
     
     /* Mini Slots Panel (Draggable & Minimizable with Emojis) */
-    /* Changed from right to left so it’s separated from the bank panel */
     #slot-panel {
       position: fixed;
-      left: 20px;
-      bottom: 300px;
+      left: 10px;
+      bottom: 100px;
       background: rgba(0,0,0,0.9);
       border: 2px solid #00C6FF;
       border-radius: 10px;
       z-index: 1700;
-      width: 220px;
+      width: 180px;
       box-shadow: 0 0 15px #00C6FF;
     }
     #slot-header {
@@ -340,7 +338,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 1.1em;
+      font-size: 1em;
       color: #00C6FF;
     }
     #minimize-slot {
@@ -434,34 +432,24 @@
       cursor: pointer;
     }
     
-    /* Footer */
-    footer {
-      padding: 20px 10px;
-      background: #0F2027;
-      text-align: center;
-      font-size: 0.9em;
-      color: #777;
-      margin-top: 40px;
-    }
-    
     /* Media Query to Scale Down Panels on Small Screens */
     @media (max-width: 480px) {
       #bank-panel, #slot-panel {
-        width: 180px;
+        width: 160px;
       }
       #bank-panel {
         bottom: 80px;
         right: 10px;
       }
       #slot-panel {
-        bottom: 200px;
+        bottom: 80px;
         left: 10px;
       }
       #bank-header, #slot-header {
-        font-size: 1em;
+        font-size: 0.9em;
       }
       #bank-content p, #slot-content input, #slot-content button {
-        font-size: 0.9em;
+        font-size: 0.8em;
         padding: 6px;
       }
     }
@@ -628,7 +616,7 @@
     </div>
   </section>
   
-  <!-- Bank Account Panel (Draggable & Minimizable) -->
+  <!-- Bank Account Panel (Draggable & Minimizable) - Visible by Default -->
   <div id="bank-panel">
     <div id="bank-header">
       <span>Bank Account</span>
@@ -645,7 +633,7 @@
     </div>
   </div>
   
-  <!-- Mini Slots Panel (Draggable & Minimizable with Emojis) -->
+  <!-- Mini Slots Panel (Draggable & Minimizable with Emojis) - Visible by Default -->
   <div id="slot-panel">
     <div id="slot-header">
       <span>Mini Slots</span>
@@ -860,34 +848,50 @@
     
     updateBalance();
     
-    /* Mini Slots Logic with Cute Emoji Symbols */
-    const slotSymbols = ["🍒", "🍓", "🍇", "🍉", "🌸", "💖"];
+    /* Expanded Emoji Array for Slots */
+    const slotSymbols = ["🍒", "🍓", "🍇", "🍉", "🌸", "💖", "🍀", "⭐", "🍋", "🍊", "🍏", "🍎"];
+    
+    /* Enhanced Mini Slots Logic with Rolling Animation & Increased Payouts */
     document.getElementById("spin-slots").addEventListener("click", () => {
       let bet = parseInt(document.getElementById("slot-bet").value);
       if (isNaN(bet) || bet <= 0 || bet > balance) {
         document.getElementById("slot-result").textContent = "Invalid bet amount!";
         return;
       }
-      let reel1 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
-      let reel2 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
-      let reel3 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
-      
-      let outcomeText = "Reels: " + reel1 + " | " + reel2 + " | " + reel3 + "<br>";
-      if (reel1 === reel2 && reel2 === reel3) {
-        outcomeText += "Jackpot! You win 5x your bet: +" + (bet * 5);
-        balance += bet * 5;
-        logTransaction("Slots Jackpot: +" + (bet * 5));
-      } else if (reel1 === reel2 || reel1 === reel3 || reel2 === reel3) {
-        outcomeText += "Two in a row! You win 2x your bet: +" + (bet * 2);
-        balance += bet * 2;
-        logTransaction("Slots Win: +" + (bet * 2));
-      } else {
-        outcomeText += "No win. You lose: -" + bet;
-        balance -= bet;
-        logTransaction("Slots Loss: -" + bet);
-      }
-      document.getElementById("slot-result").innerHTML = outcomeText;
-      updateBalance();
+      let spinDuration = 2000; // 2 seconds of spinning
+      let spinInterval = 100;
+      let elapsed = 0;
+      let reel1, reel2, reel3;
+      const interval = setInterval(() => {
+         reel1 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+         reel2 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+         reel3 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+         document.getElementById("slot-result").innerHTML = "Spinning: " + reel1 + " | " + reel2 + " | " + reel3;
+         elapsed += spinInterval;
+         if (elapsed >= spinDuration) {
+           clearInterval(interval);
+           // Final random selection
+           reel1 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+           reel2 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+           reel3 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+           let outcomeText = "Reels: " + reel1 + " | " + reel2 + " | " + reel3 + "<br>";
+           if (reel1 === reel2 && reel2 === reel3) {
+             outcomeText += "Jackpot! You win 10x your bet: +" + (bet * 10);
+             balance += bet * 10;
+             logTransaction("Slots Jackpot: +" + (bet * 10));
+           } else if (reel1 === reel2 || reel1 === reel3 || reel2 === reel3) {
+             outcomeText += "Two in a row! You win 3x your bet: +" + (bet * 3);
+             balance += bet * 3;
+             logTransaction("Slots Win: +" + (bet * 3));
+           } else {
+             outcomeText += "No win. You lose: -" + bet;
+             balance -= bet;
+             logTransaction("Slots Loss: -" + bet);
+           }
+           document.getElementById("slot-result").innerHTML = outcomeText;
+           updateBalance();
+         }
+      }, spinInterval);
     });
     
     /* Draggable Panels */
@@ -925,7 +929,7 @@
       }
     }
     
-    /* Minimize/Restore Panels */
+    /* Minimize/Restore Panels (Content Only) */
     document.getElementById("minimize-bank").addEventListener("click", function() {
       var content = document.getElementById("bank-content");
       if(content.style.display === "none"){
@@ -951,21 +955,19 @@
     const blackjackModal = document.getElementById("blackjack-modal");
     const closeButton = document.querySelector(".close-button");
     document.getElementById("play-blackjack").addEventListener("click", () => {
-      // Hide the Mini Slots panel while playing Blackjack
+      // Optionally, hide the Mini Slots panel while playing Blackjack
       document.getElementById("slot-panel").style.display = "none";
       blackjackModal.style.display = "block";
     });
     closeButton.addEventListener("click", () => {
       blackjackModal.style.display = "none";
       document.getElementById("blackjack-result").innerHTML = "";
-      // Restore the Mini Slots panel after closing the modal
       document.getElementById("slot-panel").style.display = "block";
     });
     window.addEventListener("click", (event) => {
       if (event.target == blackjackModal) {
         blackjackModal.style.display = "none";
         document.getElementById("blackjack-result").innerHTML = "";
-        // Restore the Mini Slots panel after closing the modal
         document.getElementById("slot-panel").style.display = "block";
       }
     });
