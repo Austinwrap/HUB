@@ -321,9 +321,10 @@
     }
     
     /* Mini Slots Panel (Draggable & Minimizable with Emojis) */
+    /* Changed from right to left so it’s separated from the bank panel */
     #slot-panel {
       position: fixed;
-      right: 20px;
+      left: 20px;
       bottom: 300px;
       background: rgba(0,0,0,0.9);
       border: 2px solid #00C6FF;
@@ -447,13 +448,14 @@
     @media (max-width: 480px) {
       #bank-panel, #slot-panel {
         width: 180px;
-        right: 10px;
       }
       #bank-panel {
         bottom: 80px;
+        right: 10px;
       }
       #slot-panel {
         bottom: 200px;
+        left: 10px;
       }
       #bank-header, #slot-header {
         font-size: 1em;
@@ -949,16 +951,22 @@
     const blackjackModal = document.getElementById("blackjack-modal");
     const closeButton = document.querySelector(".close-button");
     document.getElementById("play-blackjack").addEventListener("click", () => {
+      // Hide the Mini Slots panel while playing Blackjack
+      document.getElementById("slot-panel").style.display = "none";
       blackjackModal.style.display = "block";
     });
     closeButton.addEventListener("click", () => {
       blackjackModal.style.display = "none";
       document.getElementById("blackjack-result").innerHTML = "";
+      // Restore the Mini Slots panel after closing the modal
+      document.getElementById("slot-panel").style.display = "block";
     });
     window.addEventListener("click", (event) => {
       if (event.target == blackjackModal) {
         blackjackModal.style.display = "none";
         document.getElementById("blackjack-result").innerHTML = "";
+        // Restore the Mini Slots panel after closing the modal
+        document.getElementById("slot-panel").style.display = "block";
       }
     });
   </script>
