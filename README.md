@@ -11,13 +11,18 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #2E2E2E, #4A4A4A, #00A1D6);
+      background: linear-gradient(135deg, #1E1E1E, #3A3A3A, #007B9A);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
       overflow-x: hidden;
-      color: #E0E0E0;
+      color: #D0D0D0;
       position: relative;
       padding-bottom: 200px;
+      transition: background 0.5s, color 0.5s;
+    }
+    body.light-mode {
+      background: linear-gradient(135deg, #E0E0E0, #F0F0F0, #B0D8E5);
+      color: #333;
     }
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
@@ -33,19 +38,40 @@
       pointer-events: none;
       z-index: -1;
     }
+    #mode-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.8);
+      color: #007B9A;
+      border: 2px solid #007B9A;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 2000;
+      font-size: 1em;
+    }
+    body.light-mode #mode-toggle {
+      background: rgba(255,255,255,0.8);
+      color: #007B9A;
+    }
     .stock-ticker {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       background: rgba(0,0,0,0.9);
-      color: #00A1D6;
+      color: #007B9A;
       padding: 15px 20px;
       font-size: 1.3em;
       white-space: nowrap;
       overflow: hidden;
       z-index: 1600;
-      text-shadow: 0 0 10px #00A1D6;
+      text-shadow: 0 0 10px #007B9A;
+    }
+    body.light-mode .stock-ticker {
+      background: rgba(255,255,255,0.9);
+      color: #007B9A;
     }
     .stock-ticker span {
       display: inline-block;
@@ -69,12 +95,16 @@
       z-index: 1500;
       box-shadow: 0 3px 10px rgba(0,0,0,0.8);
     }
+    body.light-mode nav {
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
     nav .logo {
       font-family: 'Playfair Display', serif;
       font-size: 2.2em;
       font-weight: bold;
-      color: #00A1D6;
-      text-shadow: 0 0 12px #00A1D6;
+      color: #007B9A;
+      text-shadow: 0 0 12px #007B9A;
     }
     nav ul {
       list-style: none;
@@ -84,11 +114,12 @@
     nav ul li { position: relative; }
     nav ul li a {
       text-decoration: none;
-      color: #E0E0E0;
+      color: #D0D0D0;
       font-weight: 600;
       transition: color 0.3s;
     }
-    nav ul li a:hover { color: #00A1D6; }
+    body.light-mode nav ul li a { color: #333; }
+    nav ul li a:hover { color: #007B9A; }
     nav ul li .dropdown {
       display: none;
       position: absolute;
@@ -99,14 +130,19 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.8);
       z-index: 1700;
     }
+    body.light-mode nav ul li .dropdown {
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
     nav ul li:hover .dropdown { display: block; }
     nav ul li .dropdown li { margin: 8px 0; }
     .hamburger {
       display: none;
       font-size: 1.8em;
       cursor: pointer;
-      color: #E0E0E0;
+      color: #D0D0D0;
     }
+    body.light-mode .hamburger { color: #333; }
     @media (max-width: 768px) {
       nav ul {
         display: none;
@@ -117,6 +153,10 @@
         background: rgba(0,0,0,0.95);
         padding: 20px;
         box-shadow: -3px 3px 10px rgba(0,0,0,0.8);
+      }
+      body.light-mode nav ul {
+        background: rgba(255,255,255,0.95);
+        box-shadow: -3px 3px 10px rgba(0,0,0,0.2);
       }
       nav ul.show { display: flex; }
       .hamburger { display: block; }
@@ -130,8 +170,8 @@
       font-family: 'Playfair Display', serif;
       font-size: 3.5em;
       margin-bottom: 15px;
-      color: #00A1D6;
-      text-shadow: 0 0 15px #00A1D6;
+      color: #007B9A;
+      text-shadow: 0 0 15px #007B9A;
       animation: pulse 3s infinite;
     }
     @keyframes pulse {
@@ -142,8 +182,9 @@
     header p {
       font-size: 1.4em;
       margin-bottom: 20px;
-      color: #B0B0B0;
+      color: #A0A0A0;
     }
+    body.light-mode header p { color: #666; }
     section {
       padding: 60px 20px;
       text-align: center;
@@ -152,8 +193,19 @@
       font-family: 'Playfair Display', serif;
       font-size: 3em;
       margin-bottom: 25px;
-      color: #00A1D6;
-      text-shadow: 0 0 12px #00A1D6;
+      color: #007B9A;
+      text-shadow: 0 0 12px #007B9A;
+    }
+    #casino h2 {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 3px solid #007B9A;
+      border-radius: 10px;
+      animation: flashyBorder 1.5s infinite alternate;
+    }
+    @keyframes flashyBorder {
+      0% { box-shadow: 0 0 10px #007B9A; }
+      100% { box-shadow: 0 0 20px #007B9A, 0 0 30px #005F7A; }
     }
     .section-content {
       max-width: 1200px;
@@ -164,64 +216,82 @@
       justify-content: center;
     }
     .card {
-      background: #2E2E2E;
+      background: #2A2A2A;
       border-radius: 12px;
-      width: 300px;
-      padding: 25px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+      width: 320px;
+      padding: 30px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.7), 0 0 15px #007B9A;
       transition: transform 0.3s, box-shadow 0.3s;
       text-decoration: none;
-      color: #E0E0E0;
+      color: #D0D0D0;
       position: relative;
       overflow: hidden;
-      border: 1px solid #00A1D6;
+      border: 2px solid #007B9A;
+      animation: cardGlow 2s infinite alternate;
+    }
+    body.light-mode .card {
+      background: #F5F5F5;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 0 15px #007B9A;
+      color: #333;
+    }
+    @keyframes cardGlow {
+      0% { box-shadow: 0 10px 20px rgba(0,0,0,0.7), 0 0 15px #007B9A; }
+      100% { box-shadow: 0 10px 20px rgba(0,0,0,0.7), 0 0 25px #007B9A; }
     }
     .card:hover {
       transform: scale(1.05);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.9), 0 0 15px #00A1D6;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.9), 0 0 20px #007B9A;
     }
     .card-icon {
-      font-size: 3.5rem;
-      margin-bottom: 15px;
-      color: #00A1D6;
-      text-shadow: 0 0 10px #00A1D6;
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: #007B9A;
+      text-shadow: 0 0 10px #007B9A;
+      transition: transform 0.3s;
     }
+    .card:hover .card-icon { transform: rotate(10deg); }
     .card h3 {
       margin-bottom: 10px;
       font-size: 1.8em;
-      color: #00A1D6;
+      color: #007B9A;
     }
     .card p {
       font-size: 1.1em;
-      color: #B0B0B0;
+      color: #A0A0A0;
       margin-bottom: 20px;
     }
+    body.light-mode .card p { color: #666; }
     .card button {
       background: transparent;
-      border: 2px solid #00A1D6;
-      color: #00A1D6;
-      padding: 10px 20px;
+      border: 2px solid #007B9A;
+      color: #007B9A;
+      padding: 12px 25px;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s, color 0.3s;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
     }
     .card button:hover {
-      background: #00A1D6;
-      color: #2E2E2E;
+      background: #007B9A;
+      color: #2A2A2A;
+      transform: scale(1.1);
     }
+    body.light-mode .card button:hover { color: #F5F5F5; }
     .beer-ticker {
       position: fixed;
       bottom: 140px;
       left: 0;
       width: 100%;
       background: rgba(0,0,0,0.9);
-      color: #00A1D6;
+      color: #007B9A;
       padding: 15px 20px;
       font-size: 1.3em;
       white-space: nowrap;
       overflow: hidden;
       z-index: 1500;
-      text-shadow: 0 0 10px #00A1D6;
+      text-shadow: 0 0 10px #007B9A;
+    }
+    body.light-mode .beer-ticker {
+      background: rgba(255,255,255,0.9);
     }
     .beer-ticker span {
       display: inline-block;
@@ -237,11 +307,15 @@
       right: 15px;
       bottom: 200px;
       background: rgba(0,0,0,0.95);
-      border: 2px solid #00A1D6;
+      border: 2px solid #007B9A;
       border-radius: 12px;
       z-index: 1700;
       width: 200px;
-      box-shadow: 0 0 20px #00A1D6;
+      box-shadow: 0 0 20px #007B9A;
+    }
+    body.light-mode #bank-panel {
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 0 20px #007B9A;
     }
     #bank-header {
       cursor: move;
@@ -251,12 +325,15 @@
       justify-content: space-between;
       align-items: center;
       font-size: 1.2em;
-      color: #00A1D6;
+      color: #007B9A;
+    }
+    body.light-mode #bank-header {
+      background: rgba(255,255,255,0.9);
     }
     #minimize-bank {
       background: transparent;
       border: none;
-      color: #00A1D6;
+      color: #007B9A;
       font-size: 1.4em;
       cursor: pointer;
     }
@@ -268,76 +345,29 @@
       font-size: 1.3em;
       margin-bottom: 15px;
     }
+    #jackpot-title {
+      color: #FFD700;
+      font-size: 1.1em;
+      margin-top: 5px;
+      display: none;
+    }
     #bank-content button {
       margin: 8px 0;
       width: 100%;
       background: transparent;
-      border: 1px solid #00A1D6;
-      color: #00A1D6;
+      border: 1px solid #007B9A;
+      color: #007B9A;
       padding: 10px;
       border-radius: 6px;
       cursor: pointer;
       transition: background 0.3s;
     }
     #bank-content button:hover {
-      background: #00A1D6;
-      color: #2E2E2E;
+      background: #007B9A;
+      color: #2A2A2A;
     }
-    #slot-panel {
-      position: fixed;
-      left: 15px;
-      bottom: 200px;
-      background: rgba(0,0,0,0.95);
-      border: 2px solid #00A1D6;
-      border-radius: 12px;
-      z-index: 1700;
-      width: 200px;
-      box-shadow: 0 0 20px #00A1D6;
-    }
-    #slot-header {
-      cursor: move;
-      background: rgba(0,0,0,0.9);
-      padding: 8px 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.2em;
-      color: #00A1D6;
-    }
-    #minimize-slot {
-      background: transparent;
-      border: none;
-      color: #00A1D6;
-      font-size: 1.4em;
-      cursor: pointer;
-    }
-    #slot-content {
-      padding: 15px;
-      text-align: center;
-    }
-    #slot-content input {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 8px;
-    }
-    #slot-content button {
-      margin: 8px 0;
-      width: 100%;
-      background: transparent;
-      border: 1px solid #00A1D6;
-      color: #00A1D6;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    #slot-content button:hover {
-      background: #00A1D6;
-      color: #2E2E2E;
-    }
-    #slot-result {
-      font-size: 1.8em;
-      margin-top: 15px;
+    body.light-mode #bank-content button:hover {
+      color: #F5F5F5;
     }
     #ledger {
       position: fixed;
@@ -347,11 +377,14 @@
       max-height: 140px;
       overflow-y: auto;
       background: rgba(0,0,0,0.9);
-      color: #00A1D6;
+      color: #007B9A;
       padding: 15px 25px;
       font-size: 1.1em;
       z-index: 1800;
-      border-top: 3px solid #00A1D6;
+      border-top: 3px solid #007B9A;
+    }
+    body.light-mode #ledger {
+      background: rgba(255,255,255,0.9);
     }
     #ledger h4 { margin-bottom: 10px; font-size: 1.5em; }
     #ledger ul {
@@ -371,21 +404,28 @@
       overflow: auto;
       background: rgba(0,0,0,0.85);
     }
+    body.light-mode .modal {
+      background: rgba(255,255,255,0.85);
+    }
     .modal-content {
-      background: #2E2E2E;
-      margin: 10% auto;
-      padding: 25px;
-      border: 3px solid #00A1D6;
+      background: #2A2A2A;
+      margin: 5% auto;
+      padding: 30px;
+      border: 3px solid #007B9A;
       width: 90%;
-      max-width: 450px;
+      max-width: 600px;
       border-radius: 12px;
-      color: #E0E0E0;
+      color: #D0D0D0;
       text-align: center;
       position: relative;
-      box-shadow: 0 0 20px #00A1D6;
+      box-shadow: 0 0 20px #007B9A;
+    }
+    body.light-mode .modal-content {
+      background: #F5F5F5;
+      color: #333;
     }
     .close-button {
-      color: #00A1D6;
+      color: #007B9A;
       float: right;
       font-size: 1.8em;
       font-weight: bold;
@@ -395,23 +435,57 @@
       margin: 25px 0;
     }
     .game-container button { margin: 8px; }
+    #slots-reels {
+      font-size: 3em;
+      margin: 20px 0;
+    }
     #rocket-multiplier {
       font-size: 2.5em;
-      color: #00A1D6;
+      color: #007B9A;
+      text-shadow: 0 0 10px #007B9A;
+    }
+    #rocket-visual {
+      font-size: 3em;
+      margin: 20px 0;
+      animation: rocketFly 2s infinite linear;
+    }
+    @keyframes rocketFly {
+      0% { transform: translateY(20px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(20px); }
+    }
+    #rocket-chat {
+      margin-top: 15px;
+      font-size: 1.1em;
+      color: #A0A0A0;
+      max-height: 100px;
+      overflow-y: auto;
+    }
+    body.light-mode #rocket-chat { color: #666; }
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2000;
+      display: none;
     }
     @media (max-width: 480px) {
-      #bank-panel, #slot-panel { width: 180px; }
-      #bank-panel { bottom: 160px; right: 10px; }
-      #slot-panel { bottom: 160px; left: 10px; }
-      #bank-header, #slot-header { font-size: 1em; }
-      #bank-content p, #slot-content input, #slot-content button { font-size: 0.9em; padding: 8px; }
-      .modal-content { max-width: 350px; }
-      #slot-result { font-size: 1.4em; }
+      #bank-panel { width: 180px; bottom: 160px; right: 10px; }
+      #bank-header { font-size: 1em; }
+      #bank-content p, #bank-content button { font-size: 0.9em; padding: 8px; }
+      .modal-content { max-width: 450px; }
+      #slots-reels { font-size: 2em; }
+      #rocket-visual { font-size: 2em; }
     }
   </style>
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+  <button id="mode-toggle">Switch Vibe</button>
   <div class="stock-ticker">
     <span>
       Algeria | Angola | Benin | Botswana | Burkina Faso | Burundi | Cape Verde | Cameroon | Central African Republic | Chad | Comoros | Democratic Republic of the Congo | Djibouti | Egypt | Equatorial Guinea | Eritrea | Eswatini | Ethiopia | Gabon | Gambia | Ghana | Guinea | Guinea-Bissau | Ivory Coast | Kenya | Lesotho | Liberia | Libya | Madagascar | Malawi | Mali | Mauritania | Mauritius | Morocco | Mozambique | Namibia | Niger | Nigeria | Republic of the Congo | Rwanda | São Tomé and Príncipe | Senegal | Seychelles | Sierra Leone | Somalia | South Africa | South Sudan | Sudan | Tanzania | Togo | Tunisia | Uganda | Zambia | Zimbabwe | Afghanistan | Armenia | Azerbaijan | Bahrain | Bangladesh | Bhutan | Brunei | Cambodia | China | Cyprus | Georgia | India | Indonesia | Iran | Iraq | Israel | Japan | Jordan | Kazakhstan | Kuwait | Kyrgyzstan | Laos | Lebanon | Malaysia | Maldives | Mongolia | Myanmar | Nepal | North Korea | Oman | Pakistan | Palestine | Philippines | Qatar | Saudi Arabia | Singapore | South Korea | Sri Lanka | Syria | Taiwan | Tajikistan | Thailand | Timor-Leste | Turkey | Turkmenistan | United Arab Emirates | Uzbekistan | Vietnam | Yemen | Albania | Andorra | Austria | Belarus | Belgium | Bosnia and Herzegovina | Bulgaria | Croatia | Cyprus | Czech Republic | Denmark | Estonia | Finland | France | Germany | Greece | Hungary | Iceland | Ireland | Italy | Kazakhstan | Kosovo | Latvia | Liechtenstein | Lithuania | Luxembourg | Malta | Moldova | Monaco | Montenegro | Netherlands | North Macedonia | Norway | Poland | Portugal | Romania | Russia | San Marino | Serbia | Slovakia | Slovenia | Spain | Sweden | Switzerland | Ukraine | United Kingdom | Vatican City | Antigua and Barbuda | Bahamas | Barbados | Belize | Canada | Costa Rica | Cuba | Dominica | Dominican Republic | El Salvador | Grenada | Guatemala | Haiti | Honduras | Jamaica | Mexico | Nicaragua | Panama | Saint Kitts and Nevis | Saint Lucia | Saint Vincent and the Grenadines | Trinidad and Tobago | United States | Argentina | Bolivia | Brazil | Chile | Colombia | Ecuador | Guyana | Paraguay | Peru | Suriname | Uruguay | Venezuela | Australia | Fiji | Kiribati | Marshall Islands | Micronesia | Nauru | New Zealand | Palau | Papua New Guinea | Samoa | Solomon Islands | Tonga | Tuvalu | Vanuatu
@@ -549,19 +623,19 @@
       <div class="card">
         <div class="card-icon"><i class="fas fa-cards"></i></div>
         <h3>Blackjack</h3>
-        <p>Play against the dealer and test your luck!</p>
+        <p>Outsmart the dealer in this classic showdown!</p>
         <button id="play-blackjack">Play Now</button>
       </div>
       <div class="card">
         <div class="card-icon"><i class="fas fa-slot-machine"></i></div>
         <h3>Slot Machine</h3>
-        <p>Spin the reels for big wins with cool vibes!</p>
+        <p>Spin for glory and chase the jackpot!</p>
         <button id="play-slots">Play Now</button>
       </div>
       <div class="card">
         <div class="card-icon"><i class="fas fa-rocket"></i></div>
         <h3>Rocket Game</h3>
-        <p>Cash out before the rocket crashes!</p>
+        <p>Race the crash with rivals in real-time!</p>
         <button id="play-rocket">Play Now</button>
       </div>
     </div>
@@ -573,22 +647,12 @@
     </div>
     <div id="bank-content">
       <p id="account-balance">$1,000,000</p>
+      <div id="jackpot-title">Jackpot King</div>
       <button id="bet-all">All or Nothing</button>
       <button id="bet-10">Bet 10%</button>
       <button id="tip-jar">Tip Jar</button>
       <button id="trash-money">Trash Money</button>
       <button id="donate-money">Donate</button>
-    </div>
-  </div>
-  <div id="slot-panel">
-    <div id="slot-header">
-      <span>Mini Slots</span>
-      <button id="minimize-slot">_</button>
-    </div>
-    <div id="slot-content">
-      <input type="number" id="slot-bet" placeholder="Bet amount" value="100">
-      <button id="spin-slots">Spin Slots</button>
-      <div id="slot-result"></div>
     </div>
   </div>
   <div id="ledger">
@@ -602,7 +666,7 @@
       <div class="game-container">
         <input type="number" id="blackjack-bet" placeholder="Bet amount">
         <button id="blackjack-start">Start</button>
-        <div id="blackjack-game">
+        <div id="blackjack-game" style="display: none;">
           <p>Player: <span id="player-hand"></span></p>
           <p>Dealer: <span id="dealer-hand"></span></p>
           <button id="hit">Hit</button>
@@ -633,8 +697,10 @@
       <div class="game-container">
         <input type="number" id="rocket-bet" placeholder="Bet amount">
         <button id="rocket-start">Launch</button>
+        <div id="rocket-visual">🚀</div>
         <div id="rocket-multiplier">1.00x</div>
         <button id="rocket-cashout" disabled>Cash Out</button>
+        <div id="rocket-chat"></div>
         <div id="rocket-result"></div>
       </div>
     </div>
@@ -656,14 +722,20 @@
   <footer>
     <p>© 2024 AUSTINWRAP. All Rights Reserved.</p>
   </footer>
+  <audio id="cheers-sound" src="https://www.myinstants.com/media/sounds/cheers.mp3"></audio>
   <script>
     const canvas = document.getElementById("particle-canvas");
     const ctx = canvas.getContext("2d");
+    const confettiCanvas = document.getElementById("confetti-canvas");
+    const confettiCtx = confettiCanvas.getContext("2d");
     let particles = [];
+    let confettiParticles = [];
     const particleCount = 100;
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
     }
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
@@ -683,13 +755,37 @@
     Particle.prototype.draw = function() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      ctx.fillStyle = "#00A1D6";
+      ctx.fillStyle = "#007B9A";
       ctx.fill();
+    }
+    function ConfettiParticle() {
+      this.x = Math.random() * confettiCanvas.width;
+      this.y = -10;
+      this.size = Math.random() * 5 + 2;
+      this.vx = (Math.random() - 0.5) * 4;
+      this.vy = Math.random() * 5 + 2;
+      this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    }
+    ConfettiParticle.prototype.update = function() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.vy += 0.1;
+      if (this.y > confettiCanvas.height) this.y = -10;
+    }
+    ConfettiParticle.prototype.draw = function() {
+      confettiCtx.fillStyle = this.color;
+      confettiCtx.fillRect(this.x, this.y, this.size, this.size);
     }
     function initParticles() {
       particles = [];
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
+      }
+    }
+    function initConfetti() {
+      confettiParticles = [];
+      for (let i = 0; i < 100; i++) {
+        confettiParticles.push(new ConfettiParticle());
       }
     }
     function animateParticles() {
@@ -700,6 +796,14 @@
       });
       requestAnimationFrame(animateParticles);
     }
+    function animateConfetti() {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confettiParticles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateConfetti);
+    }
     initParticles();
     animateParticles();
 
@@ -709,6 +813,7 @@
     const modalBalance = document.getElementById("modal-balance");
     const ledgerList = document.getElementById("ledger-list");
     const modalLedgerList = document.getElementById("modal-ledger-list");
+    const cheersSound = document.getElementById("cheers-sound");
     function updateBalance() {
       balanceDisplay.textContent = "$" + balance.toLocaleString();
       modalBalance.textContent = "$" + balance.toLocaleString();
@@ -733,11 +838,17 @@
       document.getElementById("nav-links").classList.toggle("show");
     });
 
-    document.getElementById("bank-link").addEventListener("click", () => {
+    document.getElementById("bank-link").addEventListener("click", (e) => {
+      e.preventDefault();
       document.getElementById("bank-modal").style.display = "block";
     });
-    document.getElementById("ledger-link").addEventListener("click", () => {
+    document.getElementById("ledger-link").addEventListener("click", (e) => {
+      e.preventDefault();
       document.getElementById("ledger-modal").style.display = "block";
+    });
+
+    document.getElementById("mode-toggle").addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
     });
 
     // Bank Actions
@@ -910,6 +1021,7 @@
     document.getElementById("play-slots").addEventListener("click", () => {
       slotsModal.style.display = "block";
       document.getElementById("slots-result").innerHTML = "";
+      document.getElementById("slots-reels").innerHTML = "";
     });
     document.getElementById("slots-spin").addEventListener("click", () => {
       let bet = parseInt(document.getElementById("slots-bet").value);
@@ -935,6 +1047,9 @@
           balance += result.payout;
           updateBalance();
           logTransaction(result.log);
+          if (result.jackpot) {
+            triggerJackpotParty();
+          }
         }
       }, spinInterval);
     });
@@ -951,34 +1066,51 @@
           }
         }
       }
-      let payout = 0, message = "", log = "";
+      let payout = 0, message = "", log = "", jackpot = false;
       if (reels[0] === reels[1] && reels[1] === reels[2]) {
         payout = bet * slotSymbols.find(s => s.emoji === reels[0]).payout;
         message = `Jackpot! +$${payout}`;
         log = `Slots Jackpot: +${payout}`;
+        jackpot = true;
       } else if (reels[0] === reels[1] || reels[1] === reels[2] || reels[0] === reels[2]) {
-        payout = bet * (reels.includes("💎") ? 2 : 1.5);
-        message = `Two match! +$${payout}`;
+        payout = bet * 2;
+        message = `Double match! +$${payout}`;
         log = `Slots Win: +${payout}`;
-      } else if (reels.includes("💎")) {
-        payout = bet * 1.5;
-        message = `Diamond bonus! +$${payout}`;
-        log = `Slots Bonus: +${payout}`;
       } else {
         message = `Lost: -$${bet}`;
         log = `Slots Loss: -${bet}`;
         payout = 0;
       }
-      return { reels, payout, message, log };
+      return { reels, payout, message, log, jackpot };
+    }
+    function triggerJackpotParty() {
+      initConfetti();
+      confettiCanvas.style.display = "block";
+      animateConfetti();
+      cheersSound.play();
+      const jackpotTitle = document.getElementById("jackpot-title");
+      jackpotTitle.style.display = "block";
+      setTimeout(() => {
+        confettiCanvas.style.display = "none";
+        jackpotTitle.style.display = "none";
+      }, 5000);
     }
 
     // Rocket Game Logic
     const rocketModal = document.getElementById("rocket-modal");
     let rocketBet = 0, multiplier = 1, crashed = false, intervalId;
+    const fakePlayers = [
+      { name: "Rusty", cashout: null, cashed: false },
+      { name: "Blaze", cashout: null, cashed: false },
+      { name: "Ace", cashout: null, cashed: false }
+    ];
+    const taunts = ["Too slow, bro!", "Catch me if you can!", "Outta here!", "Later, suckers!"];
     document.getElementById("play-rocket").addEventListener("click", () => {
       rocketModal.style.display = "block";
       document.getElementById("rocket-result").innerHTML = "";
+      document.getElementById("rocket-chat").innerHTML = "";
       document.getElementById("rocket-cashout").disabled = true;
+      document.getElementById("rocket-start").disabled = false;
     });
     document.getElementById("rocket-start").addEventListener("click", () => {
       rocketBet = parseInt(document.getElementById("rocket-bet").value);
@@ -990,13 +1122,24 @@
       updateBalance();
       multiplier = 1;
       crashed = false;
+      fakePlayers.forEach(p => {
+        p.cashout = Math.random() * 15 + 2;
+        p.cashed = false;
+      });
       document.getElementById("rocket-multiplier").textContent = "1.00x";
       document.getElementById("rocket-start").disabled = true;
       document.getElementById("rocket-cashout").disabled = false;
+      const chat = document.getElementById("rocket-chat");
       intervalId = setInterval(() => {
         if (crashed) return;
         multiplier += 0.05;
         document.getElementById("rocket-multiplier").textContent = multiplier.toFixed(2) + "x";
+        fakePlayers.forEach(p => {
+          if (!p.cashed && multiplier >= p.cashout) {
+            p.cashed = true;
+            chat.innerHTML += `<p>${p.name}: ${taunts[Math.floor(Math.random() * taunts.length)]} (Cashed at ${p.cashout.toFixed(2)}x)</p>`;
+          }
+        });
         if (Math.random() < crashProbability(multiplier)) {
           crashed = true;
           clearInterval(intervalId);
@@ -1014,66 +1157,49 @@
         balance += payout;
         document.getElementById("rocket-result").innerHTML = `Cashed out at ${multiplier.toFixed(2)}x! +$${payout}`;
         logTransaction(`Rocket Win: +${payout}`);
+        document.getElementById("rocket-chat").innerHTML += `<p>You: Nailed it! (Cashed at ${multiplier.toFixed(2)}x)</p>`;
         updateBalance();
         document.getElementById("rocket-start").disabled = false;
         document.getElementById("rocket-cashout").disabled = true;
       }
     });
     function crashProbability(multiplier) {
-      if (multiplier < 2) return 0.05;
-      if (multiplier < 5) return 0.1;
-      if (multiplier < 10) return 0.2;
-      if (multiplier < 20) return 0.3;
-      if (multiplier < 100) return 0.5;
-      return 0.7;
+      if (multiplier < 3) return 0.02;
+      if (multiplier < 7) return 0.05;
+      if (multiplier < 15) return 0.1;
+      if (multiplier < 30) return 0.2;
+      if (multiplier < 100) return 0.4;
+      return 0.6;
     }
-
-    // Mini Slots Logic
-    document.getElementById("spin-slots").addEventListener("click", () => {
-      let bet = parseInt(document.getElementById("slot-bet").value);
-      if (isNaN(bet) || bet <= 0 || bet > balance) {
-        document.getElementById("slot-result").textContent = "Invalid bet!";
-        return;
-      }
-      balance -= bet;
-      updateBalance();
-      let spinDuration = 1500, spinInterval = 50, elapsed = 0;
-      const resultDiv = document.getElementById("slot-result");
-      const interval = setInterval(() => {
-        let r1 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)].emoji;
-        let r2 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)].emoji;
-        let r3 = slotSymbols[Math.floor(Math.random() * slotSymbols.length)].emoji;
-        resultDiv.textContent = `${r1} | ${r2} | ${r3}`;
-        elapsed += spinInterval;
-        if (elapsed >= spinDuration) {
-          clearInterval(interval);
-          let result = spinSlots(bet);
-          resultDiv.textContent = `${result.reels.join(" | ")} - ${result.message}`;
-          balance += result.payout;
-          updateBalance();
-          logTransaction(result.log);
-        }
-      }, spinInterval);
-    });
 
     // Modal Close
     document.querySelectorAll(".close-button").forEach(btn => {
       btn.addEventListener("click", () => {
-        btn.closest(".modal").style.display = "none";
+        const modal = btn.closest(".modal");
+        modal.style.display = "none";
+        if (modal.id === "rocket-modal" && intervalId) {
+          clearInterval(intervalId);
+          document.getElementById("rocket-start").disabled = false;
+          document.getElementById("rocket-cashout").disabled = true;
+        }
       });
     });
     window.addEventListener("click", (event) => {
       if (event.target.classList.contains("modal")) {
         event.target.style.display = "none";
+        if (event.target.id === "rocket-modal" && intervalId) {
+          clearInterval(intervalId);
+          document.getElementById("rocket-start").disabled = false;
+          document.getElementById("rocket-cashout").disabled = true;
+        }
       }
     });
 
-    // Draggable Panels
+    // Draggable Bank Panel
     dragElement(document.getElementById("bank-panel"));
-    dragElement(document.getElementById("slot-panel"));
     function dragElement(elmnt) {
       let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-      let header = elmnt.querySelector("[id$='header']");
+      let header = elmnt.querySelector("#bank-header");
       if (header) header.onmousedown = dragMouseDown;
       function dragMouseDown(e) {
         e.preventDefault();
@@ -1097,14 +1223,9 @@
       }
     }
 
-    // Minimize Panels
+    // Minimize Bank Panel
     document.getElementById("minimize-bank").addEventListener("click", function() {
       let content = document.getElementById("bank-content");
-      content.style.display = content.style.display === "none" ? "block" : "none";
-      this.textContent = content.style.display === "none" ? "+" : "_";
-    });
-    document.getElementById("minimize-slot").addEventListener("click", function() {
-      let content = document.getElementById("slot-content");
       content.style.display = content.style.display === "none" ? "block" : "none";
       this.textContent = content.style.display === "none" ? "+" : "_";
     });
